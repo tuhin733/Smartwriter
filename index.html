@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8" />
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Document title -->
+    <title>Recall Notes</title>
+
+    <!-- link for favicon -->
+    <!-- For SVG format -->
+    <link rel="icon" href="logo/logo.svg" type="image/svg+xml" />
+
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Link to Google Fonts for the Roboto font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Link to Google icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <!-- Header section with the title and search functionality -->
+    <header class="header-container">
+      <div class="logo-container">
+        <span class="material-symbols-outlined recall-logo"
+          >model_training
+        </span>
+        <h1>Smartwriter</h1>
+      </div>
+      <div class="search-container">
+        <!-- Search input field for searching notes -->
+        <input type="text" id="searchInput" placeholder="Search notes..." />
+        <!-- Button to toggle dark mode -->
+        <button id="toggleDarkMode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main container for the note-taking application -->
+    <div class="main-container">
+      <!-- Left container for adding new notes -->
+      <div class="left-container">
+        <div class="add-note-container">
+          <!-- Input field for the note title -->
+          <input type="text" id="noteTitle" placeholder="Note title..." />
+
+          <!-- Container for textarea and upload icon -->
+          <div class="textarea-container">
+            <!-- Textarea for the note content -->
+            <textarea
+              id="noteInput"
+              placeholder="write your note here..."
+            ></textarea>
+
+            <!-- upload image container -->
+            <div class="upload-icon-container">
+              <!-- Image preview container -->
+              <div id="imagePreviewContainer" style="display: none">
+                <img
+                  class="preview-image"
+                  id="imagePreview"
+                  src=""
+                  alt="Image Preview"
+                  title="Image Preview"
+                />
+              </div>
+              <input type="file" id="imageInput" style="display: none" />
+              <span
+                class="material-symbols-outlined attach-icon"
+                id="uploadImageBtn"
+                title="attach Image"
+              >
+                attach_file_add
+              </span>
+
+              <span id="saveBtn" class="material-symbols-outlined send-icon">
+                send
+              </span>
+            </div>
+          </div>
+
+          <!-- Display for character count -->
+          <div class="counter-container">
+            <span id="charCount" class="counter1-text">characters 0</span> |
+            <span id="wordCount" class="counter2-text"> Word Count 0</span>
+          </div>
+        </div>
+        <div class="about-section">
+          <h4 class="about-text">About Me</h4>
+          <p>
+            I'm Naim Sarkar, a passionate 20-year-old frontend web developer
+            with 2 years of experience. Self-taught and driven by curiosity, I
+            specialize in creating visually compelling, user-friendly websites.
+            Let's collaborate to bring your digital ideas to life with precision
+            and creativity. Reach me at
+            <span class="email-text">naim13602@gmail.com</span>
+          </p>
+          <hr />
+          <div class="copy-rights">
+            © 2024 Naim Sarkar. All rights reserved.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right container to display saved notes -->
+      <div class="right-container">
+        <h1>Your Notes</h1>
+        <div class="scroll-container">
+          <!-- Container where notes will be dynamically added -->
+          <div id="notesList" class="notesList-containter">
+            <!-- Notes will be added here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="noteModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+      </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+  </body>
+</html>

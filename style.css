@@ -1,0 +1,585 @@
+/* Import FontAwesome icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+/* Global styling for all elements */
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Basic styling for the body */
+body {
+  background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
+  color: #333;
+}
+
+/* Styling for the header container */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  color: white;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the header text */
+.header-container h1 {
+  font-size: 24px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Styling for the search container */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for the search input field */
+.search-container input {
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #333;
+}
+
+/* Styling for the heade button */
+.search-container button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+/* Styling for the moon icon */
+.fa-moon {
+  padding: 5px;
+}
+
+/* Main container styling */
+.main-container {
+  display: flex;
+  padding: 100px 20px 20px 20px;
+  gap: 20px;
+  margin: auto;
+  transition: background 0.5s ease;
+}
+
+/* Styling for the left container */
+.left-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* styling for add note container */
+.add-note-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure full width of container */
+}
+
+.textarea-container {
+  width: 100%; /* Ensure the textarea and icon container use full width */
+  position: relative;
+}
+
+/* Styling for the note title input */
+#noteTitle {
+  padding: 15px;
+  border-radius: 20px 20px 0px 0px;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #333;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+/* Styling for the note content textarea */
+.left-container textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 0px 0px 20px 20px;
+  font-size: 14px;
+  resize: none;
+  height: 150px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #333;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+/* Remove outline on focus for textarea and note title */
+textarea:focus {
+  outline: none;
+}
+
+#noteInput {
+  width: 100%; /* Make sure the textarea takes the full width */
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  padding-bottom: 30px; /* Space for the icon inside the textarea */
+}
+
+#noteTitle:focus {
+  outline: none;
+}
+
+.upload-icon-container {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px; /* Add a gap between the image and the icon */
+}
+
+.attach-icon,
+.send-icon {
+  cursor: pointer;
+  color: #333;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 24px;
+}
+
+.attach-icon:hover {
+  /* background-color: #c5eaff; */
+  color: #00aeff;
+}
+
+.send-icon:hover {
+  /* background-color: #c5eaff; */
+  color: #00aeff;
+}
+
+.preview-image {
+  border-radius: 5px;
+  max-width: 30px;
+  max-width: 30px;
+  clip-path: circle();
+  transition: all 0.3s ease;
+}
+
+.counter-container {
+  align-self: flex-start;
+  font-size: 12px;
+  color: #666;
+  margin-left: 10px;
+  padding-top: 8px;
+}
+
+/* Styling for about section */
+.about-section {
+  color: #666;
+  padding: 10px;
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
+}
+
+.about-section > h4 {
+  text-align: center;
+  color: #414141;
+  margin-bottom: 5px;
+}
+
+.about-section > p {
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  word-spacing: 0.1px;
+}
+.about-section > hr {
+  border: 1px dashed #8d8d8d;
+  margin-top: 7px;
+  margin-bottom: 2px;
+}
+
+.email-text {
+  color: #575757;
+  font-weight: bold;
+}
+
+.copy-rights {
+  font-size: 12px;
+  text-align: center;
+  padding-top: 5px;
+}
+
+/* Styling for the right container */
+.right-container {
+  flex: 2;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  height: 80vh;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  overflow-y: hidden;
+}
+
+/* Styling for headings in the right container */
+.right-container h1 {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+/* Styling for the scroll container container */
+.scroll-container {
+  width: 100%;
+  height: 90%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
+}
+
+/* Styling for the notes list container */
+.notesList-containter {
+  column-count: 3;
+  column-gap: 10px;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Styling for note items */
+.note-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border-top: 5px solid #764ba2;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow-wrap: break-word;
+  break-inside: avoid;
+  box-sizing: border-box;
+}
+
+/* Styling for note item headings */
+.note-item > h3 {
+  margin-bottom: 5px;
+}
+
+/* Styling for note item text */
+.note-item > span {
+  font-size: 15px;
+}
+
+/* Hover effect for note items */
+.note-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for icons within note items */
+.note-item .icon-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show icon buttons on note item hover */
+.note-item:hover .icon-btn {
+  opacity: 1;
+}
+
+/* Styling for individual icon buttons */
+.note-item .fa-edit,
+.note-item .fa-trash,
+.note-item .fa-save,
+.note-item .fa-eye {
+  cursor: pointer;
+  color: #333;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Hover effect for icon buttons */
+.note-item .fa-edit:hover,
+.note-item .fa-trash:hover,
+.note-item .fa-save:hover,
+.note-item .fa-eye:hover {
+  background-color: #c5eaff;
+  color: #00aeff;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+  border-top: 10px solid #764ba2;
+  max-width: 500px;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.modal-content > img {
+  object-fit: contain; /* Scale the image within its container without cropping */
+}
+
+.modal-content > h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid #aaa;
+  padding: 0px 5px;
+  border-radius: 50%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  border: 3px solid #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.recall-logo {
+  font-size: 30px;
+}
+
+/* Responsive styling for devices with max-width of 768px */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .header-container h1 {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  .search-container input {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .search-container button {
+    margin-left: 3px;
+    font-size: 20px;
+  }
+
+  .fa-moon {
+    font-size: 24px;
+  }
+  .left-container textarea {
+    font-size: 14px;
+  }
+
+  .note-item {
+    width: calc(100% - 20px);
+  }
+
+  .note-item > h3 {
+    font-size: 16px;
+  }
+
+  .note-item > span {
+    font-size: 14px;
+  }
+  .note-item .icon-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    /* opacity: 1; */
+    transition: opacity 0.3s ease;
+  }
+  .notesList-containter {
+    column-count: 1; /* Show only 1 note in a row for small screens */
+  }
+  .right-container {
+    min-height: 300px;
+    max-height: calc(100vh - 150px);
+  }
+
+  .scroll-container {
+    padding-left: 15px;
+    min-height: 300px;
+    max-height: calc(100vh - 150px);
+    padding-bottom: 10px;
+  }
+
+  .right-container h1 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .about-text {
+    font-size: 16px;
+  }
+
+  .about-section > p {
+    font-size: 14px;
+  }
+  .copy-rights {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    border-top: 10px solid #764ba2;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+  }
+}
+
+/* Dark mode styling */
+body.dark-mode .main-container {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .header-container,
+body.dark-mode .left-container,
+body.dark-mode .right-container,
+body.dark-mode .modal-content {
+  background-color: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(15px);
+  color: #e0e0e0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .search-container input {
+  background-color: rgba(60, 60, 60, 0.8);
+  color: #e0e0e0;
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode #noteTitle {
+  background-color: rgba(60, 60, 60, 0.8);
+  color: #e0e0e0;
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode textarea {
+  background-color: rgba(60, 60, 60, 0.8);
+  color: #e0e0e0;
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode button {
+  background-color: rgba(80, 80, 80, 0.8);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+body.dark-mode .note-item {
+  background-color: rgba(50, 50, 50, 0.8);
+  border-top: 5px solid #667eea;
+  color: #e0e0e0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .note-item .fa-edit,
+body.dark-mode .note-item .fa-trash,
+body.dark-mode .note-item .fa-save,
+body.dark-mode .note-item .fa-eye,
+body.dark-mode .left-container .attach-icon,
+body.dark-mode .left-container .send-icon {
+  color: #ffffff;
+}
+
+body.dark-mode .note-item .fa-edit:hover,
+body.dark-mode .note-item .fa-trash:hover,
+body.dark-mode .note-item .fa-save:hover,
+body.dark-mode .note-item .fa-eye:hover,
+body.dark-mode .left-container .attach-icon:hover,
+body.dark-mode .left-container .send-icon:hover {
+  background-color: rgba(80, 80, 80, 0.8);
+}
+
+body.dark-mode .modal-content .close:hover {
+  color: white;
+  border: 3px solid white;
+}
+
+body.dark-mode .about-section {
+  background-color: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(15px);
+  color: #e0e0e0;
+}
+
+body.dark-mode .left-container .email-text {
+  color: #e0e0e0;
+}
+
+body.dark-mode .left-container .about-text {
+  color: #e0e0e0;
+}
