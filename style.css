@@ -37,6 +37,7 @@ body {
 /* Styling for the header text */
 .header-container h1 {
   font-size: 24px;
+  color: #1976d2;
 }
 
 .logo-container {
@@ -415,23 +416,25 @@ textarea:focus {
   .header-container h1 {
     font-size: 20px;
     margin-right: 5px;
+    color: #1976d2;
   }
 
   .search-container input {
     font-size: 13px;
-    padding: 12px;
+    padding: 8px;
+    width: 130px;
   }
 
   .search-container button {
-    margin-left: 3px;
-    font-size: 20px;
+    margin-left: 5px;
   }
 
   .fa-moon {
-    font-size: 24px;
+    font-size: 16px;
   }
   .left-container textarea {
     font-size: 14px;
+    height: 200px;
   }
 
   .note-item {
@@ -582,4 +585,8 @@ body.dark-mode .left-container .email-text {
 
 body.dark-mode .left-container .about-text {
   color: #e0e0e0;
+}
+
+body.dark-mode .header-container h1 {
+  color: white;
 }
