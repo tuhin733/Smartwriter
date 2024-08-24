@@ -42,7 +42,10 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
+}
+
+.logo-container img {
 }
 
 /* Styling for the search container */
