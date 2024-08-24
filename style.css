@@ -45,9 +45,6 @@ body {
   gap: 10px;
 }
 
-.logo-container img {
-}
-
 /* Styling for the search container */
 .search-container {
   display: flex;
