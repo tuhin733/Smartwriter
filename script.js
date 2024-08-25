@@ -303,4 +303,46 @@ document.addEventListener("DOMContentLoaded", function () {
       icon2.style.display = "none";
     }
   };
+
+  // Voice-to-Text Integration
+  const startRecording = document.getElementById("start-recording");
+
+  let recognition;
+  let isRecording = false; // Flag to track recording state
+
+  if ("webkitSpeechRecognition" in window) {
+    recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      noteInput.value += transcript + " ";
+    };
+
+    recognition.onstart = function () {
+      isRecording = true;
+      startRecording.classList.add("recording");
+      startRecording.innerHTML = '<i class="fas fa-stop"></i>'; // Change button text to indicate stopping
+    };
+
+    recognition.onend = function () {
+      isRecording = false;
+      startRecording.classList.remove("recording");
+      startRecording.innerHTML = '<i class="fas fa-microphone"></i>'; // Change button text back
+    };
+
+    startRecording.addEventListener("click", function () {
+      if (recognition) {
+        if (isRecording) {
+          recognition.stop();
+        } else {
+          recognition.start();
+        }
+      }
+    });
+  } else {
+    alert("Your browser doesn't support speech recognition.");
+  }
 });

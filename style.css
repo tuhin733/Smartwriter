@@ -172,7 +172,8 @@ textarea:focus {
 }
 
 .attach-icon,
-.send-icon {
+.send-icon,
+.fa-microphone {
   cursor: pointer;
   color: #333;
   padding: 5px;
@@ -183,6 +184,11 @@ textarea:focus {
 .attach-icon:hover {
   /* background-color: #c5eaff; */
   color: #00aeff;
+}
+
+.fa-microphone,
+.fa-stop {
+  visibility: hidden;
 }
 
 .send-icon:hover {
@@ -500,6 +506,29 @@ textarea:focus {
     overflow-y: auto;
     border-radius: 8px;
   }
+
+  .attach-icon:hover {
+    /* background-color: #c5eaff; */
+    color: #00aeff;
+  }
+
+  .fa-microphone:hover {
+    /* background-color: #c5eaff; */
+    color: #00aeff;
+  }
+
+  .fa-microphone {
+    color: #333;
+    transition: transform 0.3s ease;
+    visibility: visible;
+  }
+
+  .fa-stop {
+    color: #ff4c4c;
+    font-size: 25px;
+    transition: transform 0.3s ease;
+    visibility: visible;
+  }
 }
 
 /* Dark mode styling */
@@ -592,5 +621,9 @@ body.dark-mode .header-container h1 {
   color: white;
 }
 body.dark-mode .header-container .fa-moon {
+  color: white;
+}
+
+body.dark-mode .left-container .fa-microphone {
   color: white;
 }
