@@ -453,6 +453,10 @@ textarea:focus {
     height: 200px;
   }
 
+  .counter-container {
+    font-size: 13px;
+  }
+
   .note-item {
     width: calc(100% - 20px);
   }
@@ -600,6 +604,10 @@ body.dark-mode .left-container .email-text {
 }
 
 body.dark-mode .left-container .about-text {
+  color: #e0e0e0;
+}
+
+body.dark-mode .left-container .counter-container {
   color: #e0e0e0;
 }
 
