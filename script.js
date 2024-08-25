@@ -282,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const image = this;
     const icon1 = document.getElementById("uploadImageBtn");
     const icon2 = document.getElementById("saveBtn");
+    const icon3 = document.getElementById("start-recording");
 
     if (image.style.maxWidth === "130px") {
       // Reset the image size
@@ -292,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Show the icon again
       icon1.style.display = "block";
       icon2.style.display = "block";
+      icon3.style.display = "block";
     } else {
       // Resize the image
       image.style.maxWidth = "130px";
@@ -301,6 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Hide the icons
       icon1.style.display = "none";
       icon2.style.display = "none";
+      icon3.style.display = "none";
     }
   };
 
