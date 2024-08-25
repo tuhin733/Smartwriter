@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const startRecording = document.getElementById("start-recording");
 
   let recognition;
-  let isRecording = false; // Flag to track recording state
+  let isRecording = false; // Track the recording state
 
   if ("webkitSpeechRecognition" in window) {
     recognition = new webkitSpeechRecognition();
@@ -324,21 +324,23 @@ document.addEventListener("DOMContentLoaded", function () {
     recognition.onstart = function () {
       isRecording = true;
       startRecording.classList.add("recording");
-      startRecording.innerHTML = '<i class="fas fa-stop"></i>'; // Change button text to indicate stopping
+      startRecording.innerHTML = '<i class="fas fa-stop"></i>'; // Change icon to stop
+      startRecording.style.color = "#ff4c4c";
     };
 
     recognition.onend = function () {
       isRecording = false;
       startRecording.classList.remove("recording");
-      startRecording.innerHTML = '<i class="fas fa-microphone"></i>'; // Change button text back
+      startRecording.innerHTML = '<i class="fas fa-microphone"></i>'; // Change icon to start
+      startRecording.style.color = "#666";
     };
 
     startRecording.addEventListener("click", function () {
       if (recognition) {
         if (isRecording) {
-          recognition.stop();
+          recognition.stop(); // Stop recording
         } else {
-          recognition.start();
+          recognition.start(); // Start recording
         }
       }
     });

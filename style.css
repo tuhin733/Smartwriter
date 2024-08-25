@@ -186,11 +186,20 @@ textarea:focus {
   color: #00aeff;
 }
 
-.fa-microphone,
-.fa-stop {
-  visibility: hidden;
+.fa-microphone:hover {
+  /* background-color: #c5eaff; */
+  color: #00aeff;
 }
 
+.fa-microphone {
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.fa-stop {
+  color: #ff4c4c;
+  font-size: 25px;
+}
 .send-icon:hover {
   /* background-color: #c5eaff; */
   color: #00aeff;
@@ -505,29 +514,6 @@ textarea:focus {
     max-height: 80vh;
     overflow-y: auto;
     border-radius: 8px;
-  }
-
-  .attach-icon:hover {
-    /* background-color: #c5eaff; */
-    color: #00aeff;
-  }
-
-  .fa-microphone:hover {
-    /* background-color: #c5eaff; */
-    color: #00aeff;
-  }
-
-  .fa-microphone {
-    color: #333;
-    transition: transform 0.3s ease;
-    visibility: visible;
-  }
-
-  .fa-stop {
-    color: #ff4c4c;
-    font-size: 25px;
-    transition: transform 0.3s ease;
-    visibility: visible;
   }
 }
 
