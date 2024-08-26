@@ -114,9 +114,10 @@
           </div>
         </div>
       </div>
-
       <!-- Right container to display saved notes -->
       <div class="right-container">
+        <!-- Button to show deleted notes modal -->
+        <button id="showDeletedNotesBtn">Show Deleted Notes</button>
         <h1>Your Notes</h1>
         <div class="scroll-container">
           <!-- Container where notes will be dynamically added -->
@@ -133,6 +134,17 @@
         <span class="close">&times;</span>
         <h2 id="modalTitle"></h2>
         <p id="modalText"></p>
+      </div>
+    </div>
+
+    <!-- Modal for showing deleted notes -->
+    <div id="deletedNotesModal" class="deleted-notes-modal">
+      <div class="deleted-notes-modal-content">
+        <span class="close">&times;</span>
+        <h2>Deleted Notes</h2>
+        <div class="deleted-notes-scroll">
+          <div id="deletedNotesList"></div>
+        </div>
       </div>
     </div>
 
