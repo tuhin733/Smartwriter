@@ -582,6 +582,9 @@ textarea:focus {
     overflow-y: auto;
     border-radius: 8px;
   }
+  .deleted-notes-modal-content {
+    margin: 30% auto;
+  }
 }
 
 /* Dark mode styling */
