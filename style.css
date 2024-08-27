@@ -465,8 +465,27 @@ textarea:focus {
 }
 
 .deleted-note-item i {
-  margin-left: 10px;
   cursor: pointer;
+  color: #333;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.deleted-note-item .fa-undo:hover {
+  color: #00aeff;
+  background: #c8eeff;
+}
+
+.deleted-note-item .fa-trash-alt {
+  margin-left: 15px;
+}
+
+.deleted-note-item .fa-trash-alt:hover {
+  color: #ff4c4c;
+  background: #ffcccc;
 }
 
 #showDeletedNotesBtn {
@@ -479,6 +498,36 @@ textarea:focus {
 }
 #showDeletedNotesBtn:hover {
   background: #ff4c4c;
+  color: white;
+}
+
+#recoverAllBtn,
+#deleteAllBtn {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#recoverAllBtn {
+  background: #00aeff;
+  color: white;
+  margin-right: 5px;
+  margin-left: 20px;
+}
+#recoverAllBtn:hover {
+  background: #0090d3;
+  color: white;
+}
+
+#deleteAllBtn {
+  background: #ff4c4c;
+  color: white;
+}
+
+#deleteAllBtn:hover {
+  background: #d40000;
   color: white;
 }
 
@@ -642,6 +691,7 @@ body.dark-mode .note-item .fa-edit,
 body.dark-mode .note-item .fa-trash,
 body.dark-mode .note-item .fa-save,
 body.dark-mode .note-item .fa-eye,
+body.dark-mode .deleted-note-item i,
 body.dark-mode .left-container .attach-icon,
 body.dark-mode .left-container .send-icon {
   color: #ffffff;
@@ -651,6 +701,7 @@ body.dark-mode .note-item .fa-edit:hover,
 body.dark-mode .note-item .fa-trash:hover,
 body.dark-mode .note-item .fa-save:hover,
 body.dark-mode .note-item .fa-eye:hover,
+body.dark-mode .deleted-note-item i:hover,
 body.dark-mode .left-container .attach-icon:hover,
 body.dark-mode .left-container .send-icon:hover {
   background-color: rgba(80, 80, 80, 0.8);

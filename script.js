@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to render notes to the main list
   function renderNotes() {
-    const notesList = document.getElementById("notesList"); // Assuming your notes list container has an ID "notesList"
+    const notesList = document.getElementById("notesList");
     notesList.innerHTML = ""; // Clear the current notes list
 
     savedNotes.forEach((note, index) => {
@@ -480,7 +480,85 @@ document.addEventListener("DOMContentLoaded", function () {
       div.appendChild(noteTitle);
       div.appendChild(noteText);
 
-      // You can add any additional controls like edit, delete, etc., here
+      if (note.imageUrl) {
+        const noteImage = document.createElement("img");
+        noteImage.src = note.imageUrl;
+        noteImage.style.maxWidth = "100%";
+        noteImage.style.borderRadius = "8px";
+        noteImage.style.marginTop = "10px";
+        div.appendChild(noteImage);
+      }
+
+      // Add edit, delete, and view icons (reuse existing code for this)
+      const iconContainer = document.createElement("div");
+      iconContainer.className = "icon-btn";
+
+      const editIcon = document.createElement("i");
+      editIcon.className = "fas fa-edit";
+      editIcon.title = "Edit";
+
+      // Edit icon functionality (reuse existing code for this)
+      editIcon.addEventListener("click", function () {
+        if (noteText.contentEditable === "false") {
+          noteText.contentEditable = true;
+          noteTitle.contentEditable = true;
+          noteText.classList.add("editable"); // Add class for styling
+          noteTitle.classList.add("editable"); // Add class for styling
+          noteText.focus();
+          editIcon.className = "fas fa-save";
+          editIcon.title = "Save";
+        } else {
+          saveNote();
+          editIcon.className = "fas fa-edit";
+          editIcon.title = "Edit";
+        }
+      });
+
+      const deleteIcon = document.createElement("i");
+      deleteIcon.className = "fas fa-trash";
+      deleteIcon.title = "Delete";
+
+      // Delete icon functionality (reuse existing code for this)
+      deleteIcon.addEventListener("click", function () {
+        notesList.removeChild(div);
+        deleteNoteFromStorage(note);
+      });
+
+      const viewIcon = document.createElement("i");
+      viewIcon.className = "fas fa-eye";
+      viewIcon.title = "View";
+
+      // View icon functionality (reuse existing code for this)
+      viewIcon.addEventListener("click", function () {
+        // Update modal title and content
+        modalTitle.textContent = note.title;
+        modalText.textContent = note.text;
+
+        // Adjust modal content based on the length of the note text
+        if (note.text.length < 100) {
+          modalText.style.fontSize = "1.2em"; // Larger font for short notes
+        } else {
+          modalText.style.fontSize = "1em"; // Normal font size
+        }
+
+        if (note.imageUrl) {
+          const modalImage = document.createElement("img");
+          modalImage.src = note.imageUrl;
+          modalImage.style.maxWidth = "100%";
+          modalImage.style.borderRadius = "8px";
+          modalImage.style.marginTop = "10px";
+          modalContent.appendChild(modalImage);
+        }
+
+        // Display the modal
+        modal.style.display = "block";
+        modalContent.style.borderTopColor = randomColor;
+      });
+
+      iconContainer.appendChild(editIcon);
+      iconContainer.appendChild(deleteIcon);
+      iconContainer.appendChild(viewIcon);
+      div.appendChild(iconContainer);
 
       notesList.appendChild(div);
     });
@@ -499,7 +577,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   closeDeletedNotesModal.addEventListener("click", function () {
     document.getElementById("deletedNotesModal").style.display = "none";
-    location.reload();
+    // location.reload();
   });
 
   // Close the deleted notes modal when clicking outside the modal content
@@ -508,4 +586,37 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("deletedNotesModal").style.display = "none";
     }
   });
+
+  // Function to recover all deleted notes
+  function recoverAllNotes() {
+    const deletedNotes = JSON.parse(localStorage.getItem("deletedNotes")) || [];
+    savedNotes.push(...deletedNotes);
+
+    // Save updated notes and clear deleted notes from local storage
+    localStorage.setItem("notes", JSON.stringify(savedNotes));
+    localStorage.setItem("deletedNotes", JSON.stringify([]));
+
+    // Re-render the notes list and update the deleted notes modal
+    renderNotes();
+    showDeletedNotes();
+  }
+
+  // Function to delete all notes permanently
+  function deleteAllNotesPermanently() {
+    localStorage.setItem("deletedNotes", JSON.stringify([])); // Clear deleted notes
+
+    // Clear the notes list in the modal
+    const deletedNotesList = document.getElementById("deletedNotesList");
+    deletedNotesList.innerHTML = "";
+
+    // Optionally, update any other UI elements
+  }
+
+  // Add event listeners for the new buttons
+  document
+    .getElementById("recoverAllBtn")
+    .addEventListener("click", recoverAllNotes);
+  document
+    .getElementById("deleteAllBtn")
+    .addEventListener("click", deleteAllNotesPermanently);
 });
