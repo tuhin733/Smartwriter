@@ -444,8 +444,8 @@ textarea:focus {
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  max-height: 70%;
+  width: 60%;
+  height: 70%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -470,6 +470,11 @@ textarea:focus {
   padding: 5px;
   border-radius: 4px;
   font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.deleted-note-item h4 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -633,6 +638,10 @@ textarea:focus {
   }
   .deleted-notes-modal-content {
     margin: 30% auto;
+  }
+
+  .deleted-notes-modal-content {
+    width: 80%;
   }
 }
 
