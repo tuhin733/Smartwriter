@@ -451,9 +451,12 @@ textarea:focus {
 }
 
 .deleted-notes-scroll {
-  height: 70vh;
+  height: 80%;
   overflow-y: auto;
   margin-top: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
 }
 
 .deleted-note-item {
@@ -598,15 +601,12 @@ textarea:focus {
     column-count: 1; /* Show only 1 note in a row for small screens */
   }
   .right-container {
-    min-height: 300px;
-    max-height: calc(100vh - 150px);
+    height: 300px;
   }
 
   .scroll-container {
     padding-left: 15px;
-    min-height: 300px;
-    max-height: calc(100vh - 150px);
-    padding-bottom: 10px;
+    height: 300px;
   }
 
   .right-container h1 {
