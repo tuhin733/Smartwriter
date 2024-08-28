@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listeners to handle Enter key press
-    function handleKeyPress(event) {
+    function editToSave(event) {
       if (event.key === "Enter") {
         event.preventDefault(); // Prevent default action (e.g., inserting a new line)
         saveNote();
@@ -166,8 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    noteText.addEventListener("keydown", handleKeyPress);
-    noteTitle.addEventListener("keydown", handleKeyPress);
+    // Add event listeners to handle Enter key press
+    noteText.addEventListener("keydown", editToSave);
+    noteTitle.addEventListener("keydown", editToSave);
 
     // Delete icon with functionality to remove the note
     const deleteIcon = document.createElement("i");
@@ -224,15 +225,6 @@ document.addEventListener("DOMContentLoaded", function () {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
-
-  // Function to delete a note from local storage
-  function deleteNoteFromStorage(note) {
-    const noteIndex = savedNotes.indexOf(note);
-    if (noteIndex > -1) {
-      savedNotes.splice(noteIndex, 1);
-      localStorage.setItem("notes", JSON.stringify(savedNotes));
-    }
   }
 
   // Search functionality for filtering notes
@@ -378,18 +370,23 @@ document.addEventListener("DOMContentLoaded", function () {
   function deleteNoteFromStorage(note) {
     const noteIndex = savedNotes.indexOf(note);
     if (noteIndex > -1) {
-      // Retrieve deleted notes from local storage
       const deletedNotes =
         JSON.parse(localStorage.getItem("deletedNotes")) || [];
-      // Add the note to the deleted notes array
+
+      // Move the note from savedNotes to deletedNotes
       deletedNotes.push(savedNotes.splice(noteIndex, 1)[0]);
-      // Save updated notes and deleted notes arrays to local storage
+
+      // Update localStorage
       localStorage.setItem("notes", JSON.stringify(savedNotes));
       localStorage.setItem("deletedNotes", JSON.stringify(deletedNotes));
-      // Remove the note from the display
-      notesList.removeChild(
-        document.querySelector(`.note-item:nth-child(${noteIndex + 1})`)
+
+      // Find the note element by its data-id attribute and remove it
+      const noteElement = document.querySelector(
+        `.note-item[data-id="${note.id}"]`
       );
+      if (noteElement) {
+        notesList.removeChild(noteElement);
+      }
     }
   }
 
@@ -563,9 +560,6 @@ document.addEventListener("DOMContentLoaded", function () {
       notesList.appendChild(div);
     });
   }
-
-  // Initial rendering of notes when the page loads
-  document.addEventListener("DOMContentLoaded", renderNotes);
 
   // Show deleted notes when the button is clicked
   const showDeletedNotesBtn = document.getElementById("showDeletedNotesBtn");

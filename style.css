@@ -87,6 +87,7 @@ body {
   gap: 20px;
   margin: auto;
   transition: background 0.5s ease;
+  height: 100vh;
 }
 
 /* Styling for the left container */
@@ -542,6 +543,7 @@ textarea:focus {
 /* Responsive styling for devices with max-width of 768px */
 @media (max-width: 768px) {
   .main-container {
+    height: auto;
     flex-direction: column;
   }
 
