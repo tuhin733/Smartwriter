@@ -14,6 +14,38 @@ body {
   background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
   color: #333;
 }
+/* scrollbar */
+body::-webkit-scrollbar,
+.about-section::-webkit-scrollbar,
+.right-container::-webkit-scrollbar,
+.scroll-container::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar,
+.deleted-notes-scroll::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 20px;
+}
+
+/* track */
+body::-webkit-scrollbar-track,
+.about-section::-webkit-scrollbar-track,
+.right-container::-webkit-scrollbar-track,
+.scroll-container::-webkit-scrollbar-track,
+.modal-content::-webkit-scrollbar-track,
+.deleted-notes-scroll::-webkit-scrollbar-track {
+  background: #deeafb;
+  border-radius: 20px;
+}
+
+/* thumb */
+body::-webkit-scrollbar-thumb,
+.about-section::-webkit-scrollbar-thumb,
+.right-container::-webkit-scrollbar-thumb,
+.scroll-container::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb,
+.deleted-notes-scroll::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(#cff6fc, #20bcf2);
+  border-radius: 20px;
+}
 
 /* Styling for the header container */
 .header-container {
@@ -230,9 +262,6 @@ textarea:focus {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
-  scroll-behavior: smooth;
 }
 
 .about-section > h4 {
@@ -288,9 +317,6 @@ textarea:focus {
   width: 100%;
   height: 90%;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
-  scroll-behavior: smooth;
 }
 
 /* Styling for the notes list container */
@@ -455,9 +481,6 @@ textarea:focus {
   height: 80%;
   overflow-y: auto;
   margin-top: 15px;
-  scrollbar-width: thin;
-  scrollbar-color: #def5ff rgba(255, 255, 255, 0.1);
-  scroll-behavior: smooth;
 }
 
 .deleted-note-item {
@@ -716,6 +739,16 @@ body.dark-mode .deleted-note-item i:hover,
 body.dark-mode .left-container .attach-icon:hover,
 body.dark-mode .left-container .send-icon:hover {
   background-color: rgba(80, 80, 80, 0.8);
+}
+
+/* Dark Mode Scrollbar */
+.dark-mode body::-webkit-scrollbar-track,
+.dark-mode .about-section::-webkit-scrollbar-track,
+.dark-mode .right-container::-webkit-scrollbar-track,
+.dark-mode .scroll-container::-webkit-scrollbar-track,
+.dark-mode .modal-content::-webkit-scrollbar-track,
+.dark-mode .deleted-notes-scroll::-webkit-scrollbar-track {
+  background: #333333;
 }
 
 body.dark-mode .modal-content .close:hover {
