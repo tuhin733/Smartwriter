@@ -613,4 +613,426 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("deleteAllBtn")
     .addEventListener("click", deleteAllNotesPermanently);
+
+  // Get the modal
+  const voiceNoteModal = document.getElementById("voiceNoteModal");
+
+  // Get the <span> elements that close the modals
+  const closeModalBtn1 = document.getElementsByClassName(
+    "close-voice-note-modal"
+  )[0];
+  const closeModalBtn2 = document.getElementsByClassName(
+    "close-password-setup-modal"
+  )[0];
+  const closeModalBtn3 = document.getElementsByClassName(
+    "close close-password-verfy-modal"
+  )[0];
+
+  // Get the start recording button
+  const startVoiceNoteBtn = document.getElementById("startVoiceNoteBtn");
+
+  // Get the save voice note button
+  const saveVoiceNoteBtn = document.getElementById("saveVoiceNoteBtn");
+
+  // Get the input for the title
+  const voiceNoteTitleInput = document.getElementById("voiceNoteTitle");
+
+  // Get the div to display the recorded voice note
+  const recordedVoiceNote = document.getElementById("recordedVoiceNote");
+
+  // Get the list for saved voice notes
+  const voiceNoteList = document.getElementById("voiceNoteList");
+
+  let mediaRecorder;
+  let voiceChunks = [];
+  let currentVoiceBlob;
+
+  // When the user clicks the button, open the modal
+  document.getElementById("openModalBtn").addEventListener("click", () => {
+    const passwordKey = "voiceNotePassword";
+    const savedPassword = localStorage.getItem(passwordKey);
+
+    const passwordSetupModal = document.getElementById("passwordSetupModal");
+    const passwordVerificationModal = document.getElementById(
+      "passwordVerificationModal"
+    );
+
+    if (!savedPassword) {
+      passwordSetupModal.style.display = "block";
+    } else {
+      passwordVerificationModal.style.display = "block";
+    }
+  });
+
+  // Save password
+  document.getElementById("savePasswordBtn").addEventListener("click", () => {
+    const setupPassword = document.getElementById("setupPassword").value;
+    if (setupPassword) {
+      localStorage.setItem("voiceNotePassword", setupPassword);
+      document.getElementById("passwordSetupModal").style.display = "none";
+      document.getElementById("voiceNoteModal").style.display = "flex";
+    }
+  });
+
+  // Verify Password
+  document.getElementById("verifyPasswordBtn").addEventListener("click", () => {
+    const verifyPassword = document.getElementById("verifyPassword").value;
+    const savedPassword = localStorage.getItem("voiceNotePassword");
+    if (verifyPassword === savedPassword) {
+      document.getElementById("passwordVerificationModal").style.display =
+        "none";
+      document.getElementById("voiceNoteModal").style.display = "flex";
+    } else {
+      document.getElementById("passwordError").style.display = "block";
+    }
+  });
+
+  // Reset button function
+  document.getElementById("resetPasswordBtn").addEventListener("click", () => {
+    const passwordKey = "voiceNotePassword";
+    const voiceNotesKey = "voiceNotes";
+
+    // Remove saved password and voice notes
+    localStorage.removeItem(passwordKey);
+    localStorage.removeItem(voiceNotesKey);
+
+    // Close all modals
+    document.querySelectorAll(".password-modal").forEach((modal) => {
+      modal.style.display = "none";
+    });
+
+    // Optionally, show a message or redirect
+    alert("Password has been reset and all voice notes have been deleted.");
+  });
+
+  // When the user clicks on <span> (x), close the modal
+  closeModalBtn1.onclick = function () {
+    voiceNoteModal.style.display = "none";
+    resetVoiceNote();
+  };
+  closeModalBtn2.onclick = function () {
+    document.getElementById("passwordSetupModal").style.display = "none";
+  };
+  closeModalBtn3.onclick = function () {
+    document.getElementById("passwordVerificationModal").style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == voiceNoteModal) {
+      voiceNoteModal.style.display = "none";
+      resetVoiceNote();
+    }
+  };
+
+  // Function to start recording a voice note
+  function startVoiceNoteRecording() {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then(function (stream) {
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+
+        startVoiceNoteBtn.classList.add("recording");
+        startVoiceNoteBtn.innerHTML =
+          '<i class="fas fa-stop stop-rec"></i> Stop Recording';
+
+        mediaRecorder.ondataavailable = function (event) {
+          voiceChunks.push(event.data);
+        };
+        mediaRecorder.onstop = function () {
+          currentVoiceBlob = new Blob(voiceChunks, { type: "audio/mp3" });
+          voiceChunks = [];
+
+          const voiceUrl = URL.createObjectURL(currentVoiceBlob);
+          recordedVoiceNote.innerHTML = ""; // Clear previous content
+
+          // Create a container for the audio controls
+          const audioContainer = document.createElement("div");
+          audioContainer.className = "audio-container";
+          recordedVoiceNote.appendChild(audioContainer);
+
+          // Play/Pause button styled like WhatsApp
+          const playPauseBtn = document.createElement("div");
+          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          playPauseBtn.className = "play-pause-btn";
+          audioContainer.appendChild(playPauseBtn);
+
+          // Create a container for the waveform
+          const waveformContainer = document.createElement("div");
+          waveformContainer.id = "waveform";
+          audioContainer.appendChild(waveformContainer);
+
+          // Current time display styled like WhatsApp
+          const currentTimeDisplay = document.createElement("span");
+          currentTimeDisplay.className = "current-time-display";
+          audioContainer.appendChild(currentTimeDisplay);
+
+          // Initialize Wavesurfer
+          const wavesurfer = WaveSurfer.create({
+            container: "#waveform",
+            waveColor: "#34b7f1",
+            progressColor: "#075e54",
+            cursorWidth: 0,
+            height: 48,
+            barWidth: 2,
+            barRadius: 2,
+          });
+
+          wavesurfer.load(voiceUrl);
+
+          // Handle Play/Pause toggle with icon change
+          playPauseBtn.addEventListener("click", () => {
+            if (wavesurfer.isPlaying()) {
+              wavesurfer.pause();
+              playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+              wavesurfer.play();
+              playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+          });
+
+          // Update the current time display
+          wavesurfer.on("audioprocess", () => {
+            const currentTime = wavesurfer.getCurrentTime();
+            currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
+          });
+
+          // Reset the play/pause button when the audio finishes playing
+          wavesurfer.on("finish", () => {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          });
+
+          saveVoiceNoteBtn.disabled = false;
+        };
+      })
+      .catch(function (err) {
+        alert("Could not start recording: " + err.message);
+      });
+  }
+
+  // Function to stop recording
+  function stopVoiceNoteRecording() {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      mediaRecorder.stop();
+    }
+
+    startVoiceNoteBtn.classList.remove("recording");
+    startVoiceNoteBtn.innerHTML =
+      '<i class="fas fa-microphone"></i> Start Recording';
+  }
+
+  // Toggle recording state when the button is clicked
+  startVoiceNoteBtn.addEventListener("click", function () {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      stopVoiceNoteRecording();
+    } else {
+      startVoiceNoteRecording();
+    }
+  });
+
+  // Save the voice note with a title
+  saveVoiceNoteBtn.addEventListener("click", function () {
+    const title = voiceNoteTitleInput.value.trim();
+    if (!title || !currentVoiceBlob) {
+      alert("Please enter a title and record a voice note.");
+      return;
+    }
+
+    const voiceUrl = URL.createObjectURL(currentVoiceBlob);
+    const listItem = document.createElement("li");
+    listItem.classList.add("voice-note-item");
+
+    // Create a container for the audio controls
+    const audioContainer = document.createElement("div");
+    audioContainer.className = "saved-audio-container";
+    listItem.appendChild(audioContainer);
+
+    // Play/Pause button styled like WhatsApp
+    const playPauseBtn = document.createElement("div");
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    playPauseBtn.className = "play-pause-btn";
+    audioContainer.appendChild(playPauseBtn);
+
+    // Create a container for the waveform
+    const waveformContainer = document.createElement("div");
+    waveformContainer.className = "waveform";
+    audioContainer.appendChild(waveformContainer);
+
+    // Current time display styled like WhatsApp
+    const currentTimeDisplay = document.createElement("span");
+    currentTimeDisplay.className = "current-time-display";
+    audioContainer.appendChild(currentTimeDisplay);
+
+    // Initialize Wavesurfer
+    const wavesurfer = WaveSurfer.create({
+      container: waveformContainer,
+      waveColor: "#34b7f1",
+      progressColor: "#075e54",
+      cursorWidth: 0,
+      height: 48,
+      barWidth: 2,
+      barRadius: 2,
+    });
+
+    wavesurfer.load(voiceUrl);
+
+    // Handle Play/Pause toggle with icon change
+    playPauseBtn.addEventListener("click", () => {
+      if (wavesurfer.isPlaying()) {
+        wavesurfer.pause();
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      } else {
+        wavesurfer.play();
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+    });
+
+    // Update the current time display
+    wavesurfer.on("audioprocess", () => {
+      const currentTime = wavesurfer.getCurrentTime();
+      currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
+    });
+
+    // Reset the play/pause button when the audio finishes playing
+    wavesurfer.on("finish", () => {
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    });
+
+    // Title and Delete button
+    const titleSpan = document.createElement("span");
+    titleSpan.classList.add("title");
+    titleSpan.textContent = title;
+    listItem.appendChild(titleSpan);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.textContent = "Delete";
+
+    // Delete functionality
+    deleteBtn.addEventListener("click", function () {
+      voiceNoteList.removeChild(listItem);
+
+      // Update localStorage
+      const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+      const updatedNotes = voiceNotes.filter((note) => note.title !== title);
+      localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+    });
+
+    listItem.appendChild(deleteBtn);
+    voiceNoteList.appendChild(listItem);
+
+    // Save the voice note to local storage
+    const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+    voiceNotes.push({ title, url: voiceUrl });
+    localStorage.setItem("voiceNotes", JSON.stringify(voiceNotes));
+
+    resetVoiceNote();
+  });
+
+  // Load saved voice notes from localStorage
+  function loadVoiceNotes() {
+    const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+    voiceNoteList.innerHTML = ""; // Clear the list
+
+    voiceNotes.forEach((note) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("voice-note-item");
+
+      // Create a container for the audio controls
+      const audioContainer = document.createElement("div");
+      audioContainer.className = "saved-audio-container";
+      listItem.appendChild(audioContainer);
+
+      // Play/Pause button styled like WhatsApp
+      const playPauseBtn = document.createElement("div");
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      playPauseBtn.className = "play-pause-btn";
+      audioContainer.appendChild(playPauseBtn);
+
+      // Create a container for the waveform
+      const waveformContainer = document.createElement("div");
+      waveformContainer.className = "waveform";
+      audioContainer.appendChild(waveformContainer);
+
+      // Current time display styled like WhatsApp
+      const currentTimeDisplay = document.createElement("span");
+      currentTimeDisplay.className = "current-time-display";
+      audioContainer.appendChild(currentTimeDisplay);
+
+      // Initialize Wavesurfer
+      const wavesurfer = WaveSurfer.create({
+        container: waveformContainer,
+        waveColor: "#34b7f1",
+        progressColor: "#075e54",
+        cursorWidth: 0,
+        height: 48,
+        barWidth: 2,
+        barRadius: 2,
+      });
+
+      wavesurfer.load(note.url);
+
+      // Handle Play/Pause toggle with icon change
+      playPauseBtn.addEventListener("click", () => {
+        if (wavesurfer.isPlaying()) {
+          wavesurfer.pause();
+          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+          wavesurfer.play();
+          playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+      });
+
+      // Update the current time display
+      wavesurfer.on("audioprocess", () => {
+        const currentTime = wavesurfer.getCurrentTime();
+        currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
+      });
+
+      // Reset the play/pause button when the audio finishes playing
+      wavesurfer.on("finish", () => {
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      });
+
+      // Title and Delete button
+      const titleSpan = document.createElement("span");
+      titleSpan.classList.add("title");
+      titleSpan.textContent = note.title;
+      listItem.appendChild(titleSpan);
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.textContent = "Delete";
+
+      // Delete functionality
+      deleteBtn.addEventListener("click", function () {
+        voiceNoteList.removeChild(listItem);
+
+        // Update localStorage
+        const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+        const updatedNotes = voiceNotes.filter(
+          (note) => note.title !== titleSpan.textContent
+        );
+        localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+      });
+
+      listItem.appendChild(deleteBtn);
+      voiceNoteList.appendChild(listItem);
+    });
+  }
+
+  // Reset the voice note content when closing the modal
+  function resetVoiceNote() {
+    recordedVoiceNote.innerHTML = "";
+    voiceNoteTitleInput.value = "";
+    currentVoiceBlob = null;
+    saveVoiceNoteBtn.disabled = true;
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      stopVoiceNoteRecording();
+    }
+  }
+
+  // Load voice notes on page load
+  window.onload = loadVoiceNotes;
 });

@@ -481,6 +481,7 @@ textarea:focus {
   height: 80%;
   overflow-y: auto;
   margin-top: 15px;
+  padding: 10px;
 }
 
 .deleted-note-item {
@@ -497,8 +498,8 @@ textarea:focus {
   padding: 5px;
   border-radius: 4px;
   font-size: 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .deleted-note-item h4 {
@@ -512,7 +513,7 @@ textarea:focus {
 }
 
 .deleted-note-item .fa-trash-alt {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .deleted-note-item .fa-trash-alt:hover {
@@ -524,10 +525,11 @@ textarea:focus {
   float: right;
   border: none;
   padding: 10px;
-  border-radius: 0px 0px 0px 10px;
+  border-radius: 0px 10px 0px 10px;
   background: #1976d2;
   color: white;
 }
+
 #showDeletedNotesBtn:hover {
   background: #ff4c4c;
   color: white;
@@ -563,6 +565,294 @@ textarea:focus {
   color: white;
 }
 
+/* voice note Modal styles */
+.voice-note-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+/* voice note Modal content styles */
+.voice-note-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  height: 70%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* voice note Modal scroll container styles */
+.voice-note-scroll-container {
+  height: 70%;
+  overflow-y: auto;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+/* password Modal styles */
+.password-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* password Modal content styles */
+.password-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  min-height: 100px;
+  border-radius: 8px;
+}
+
+/* Recording button styles */
+#startVoiceNoteBtn {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#startVoiceNoteBtn:hover {
+  background-color: #00aeff;
+}
+
+#startVoiceNoteBtn.recording {
+  background-color: #ff4c4c;
+}
+
+/* Voice note list styles */
+.voice-note-list {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+.voice-note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.voice-note-item .title {
+  font-size: 16px;
+  font-weight: bold;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.delete-btn {
+  background-color: #ff4c4c;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.custom-buttom {
+  border: none;
+  background: #00aeff;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+.custom-buttom:hover {
+  background: #0090d3;
+}
+
+.custom-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #cccccc;
+  border-radius: 3px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f5f5f5;
+}
+.custom-input:focus {
+  outline: none;
+  background: #f3fbff;
+  border-color: #00aeff;
+}
+
+.Password-verify-container {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 20px;
+}
+
+.Password-verify-container p {
+  display: none;
+  font-size: 14px;
+  margin: -12px;
+  color: #ff4c4c;
+}
+
+.Password-verify-container h3 {
+  color: #666;
+}
+
+.voice-button-container {
+  display: flex;
+  gap: 30px;
+}
+
+.voice-button-container .fa-microphone {
+  color: white;
+}
+.voice-button-container .fa-microphone {
+  color: white;
+}
+
+.password-setup-container {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.password-setup-container h3 {
+  color: #666;
+}
+
+.voice-inout-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center; /* Horizontally center items */
+  align-items: center; /* Vertically center items */
+}
+
+.voice-inout-container #saveVoiceNoteBtn {
+  margin-left: -18px;
+  background-color: #1976d2;
+  color: #fff;
+  padding: 15px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.voice-inout-container #saveVoiceNoteBtn:hover {
+  background: #00aeff;
+}
+
+.stop-rec {
+  color: white;
+}
+
+#openModalBtn {
+  float: right;
+  border: none;
+  padding: 10px;
+  border-radius: 0px 0px 0px 10px;
+  background: #1976d2;
+  color: white;
+  margin-left: 8px;
+}
+#openModalBtn:hover {
+  background: #ff4c4c;
+  color: white;
+}
+
+/* audio container */
+.audio-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.play-pause-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: #075e54;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#waveform,
+.waveform {
+  flex-grow: 1;
+  margin: 0 10px;
+  min-width: 100px; /* Set a minimum width for better responsiveness */
+  height: 48px; /* Ensure the height is appropriate */
+  max-width: 100%; /* Ensure the waveform does not exceed the container width */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.current-time-display {
+  font-size: 14px;
+  color: #075e54;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* save voice notes */
+
+.saved-audio-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #ff1a1a;
+}
+#recordedVoiceNote {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 /* Responsive styling for devices with max-width of 768px */
 @media (max-width: 768px) {
   body::-webkit-scrollbar,
@@ -678,6 +968,51 @@ textarea:focus {
   .deleted-notes-modal-content {
     width: 80%;
   }
+
+  .password-modal-content {
+    margin: 40% auto;
+    width: 80%;
+  }
+
+  /* voice note Modal content styles */
+  .voice-note-modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 70%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Recording button styles */
+  #startVoiceNoteBtn {
+    background-color: #1976d2;
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .voice-inout-container #saveVoiceNoteBtn {
+    margin-left: -18px;
+    background-color: #1976d2;
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .audio-container {
+    width: 90%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
 }
 
 /* Dark mode styling */
@@ -691,7 +1026,10 @@ body.dark-mode .left-container,
 body.dark-mode .right-container,
 body.dark-mode .modal-content,
 body.dark-mode .deleted-notes-modal-content,
-body.dark-mode .deleted-note-item {
+body.dark-mode .voice-note-modal-content,
+body.dark-mode .password-modal-content,
+body.dark-mode .deleted-note-item,
+body.dark-mode .voice-note-item {
   background-color: rgba(40, 40, 40, 0.8);
   backdrop-filter: blur(15px);
   color: #e0e0e0;
@@ -793,4 +1131,17 @@ body.dark-mode .header-container .fa-moon {
 
 body.dark-mode .left-container .fa-microphone {
   color: white;
+}
+
+body.dark-mode .custom-input {
+  background: #333333;
+  color: white;
+}
+
+body.dark-mode .custom-input:focus {
+  background: #464646;
+}
+
+body.dark-mode .audio-container {
+  background: #1f1f1f;
 }

@@ -116,8 +116,11 @@
       </div>
       <!-- Right container to display saved notes -->
       <div class="right-container">
+        <!-- Trigger/Open The Modal -->
+        <button id="openModalBtn">Voice Note</button>
+
         <!-- Button to show deleted notes modal -->
-        <button id="showDeletedNotesBtn">Show Deleted Notes</button>
+        <button id="showDeletedNotesBtn">Deleted Notes</button>
         <h1>Your Notes</h1>
         <div class="scroll-container">
           <!-- Container where notes will be dynamically added -->
@@ -150,8 +153,79 @@
       </div>
     </div>
 
-    <!-- Link to external JavaScript file -->
+    <!-- Password Setup Modal -->
+    <div id="passwordSetupModal" class="password-modal">
+      <div class="password-modal-content">
+        <span class="close close-password-setup-modal">&times;</span>
+        <div class="password-setup-container">
+          <h3>Set Up Your Password</h3>
+          <input
+            type="password"
+            id="setupPassword"
+            placeholder="Create Password"
+            class="custom-input"
+          />
+          <button id="savePasswordBtn" class="custom-buttom">
+            Save Password
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password Verification Modal -->
+    <div id="passwordVerificationModal" class="password-modal">
+      <div class="password-modal-content">
+        <span class="close close-password-verfy-modal">&times;</span>
+
+        <div class="Password-verify-container">
+          <h3>Enter Your Password</h3>
+          <input
+            type="password"
+            id="verifyPassword"
+            placeholder="Enter Password"
+            class="custom-input"
+          />
+          <p id="passwordError">Incorrect Password!</p>
+          <div class="button-container">
+            <button id="verifyPasswordBtn" class="custom-buttom">Verify</button>
+            <!-- Reset Password Button -->
+            <button id="resetPasswordBtn" class="custom-buttom">
+              Reset Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The voice note Modal -->
+    <div id="voiceNoteModal" class="voice-note-modal">
+      <div class="voice-note-modal-content">
+        <span class="close close-voice-note-modal">&times;</span>
+        <div class="voice-inout-container">
+          <h3>Record Your Voice Note</h3>
+          <input
+            type="text"
+            id="voiceNoteTitle"
+            placeholder="Enter Title"
+            class="custom-input"
+          />
+          <div class="voice-button-container">
+            <button id="startVoiceNoteBtn">
+              <i class="fas fa-microphone"></i> Start Recording
+            </button>
+            <button id="saveVoiceNoteBtn" disabled>Save Voice Note</button>
+          </div>
+          <div id="recordedVoiceNote"></div>
+        </div>
+        <div class="voice-note-scroll-container">
+          <!-- Voice Note List -->
+          <ul id="voiceNoteList" class="voice-note-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link to external JavaScript files -->
     <script src="script.js"></script>
-    <!-- <script src="validation.js"></script> -->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
   </body>
 </html>
