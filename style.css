@@ -815,7 +815,6 @@ textarea:focus {
   flex-grow: 1;
   margin: 0 10px;
   min-width: 100px; /* Set a minimum width for better responsiveness */
-  height: 48px; /* Ensure the height is appropriate */
   max-width: 100%; /* Ensure the waveform does not exceed the container width */
   box-sizing: border-box; /* Include padding and border in element's total width and height */
 }

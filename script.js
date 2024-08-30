@@ -771,12 +771,12 @@ document.addEventListener("DOMContentLoaded", function () {
           // Initialize Wavesurfer
           const wavesurfer = WaveSurfer.create({
             container: "#waveform",
-            waveColor: "#34b7f1",
+            waveColor: "#666",
             progressColor: "#075e54",
-            cursorWidth: 0,
-            height: 48,
-            barWidth: 2,
-            barRadius: 2,
+            cursorWidth: 2,
+            height: 30,
+            barWidth: 5,
+            barRadius: 5,
           });
 
           wavesurfer.load(voiceUrl);
@@ -867,12 +867,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize Wavesurfer
     const wavesurfer = WaveSurfer.create({
       container: waveformContainer,
-      waveColor: "#34b7f1",
+      waveColor: "#666",
       progressColor: "#075e54",
-      cursorWidth: 0,
-      height: 48,
-      barWidth: 2,
-      barRadius: 2,
+      cursorWidth: 2,
+      height: 30,
+      barWidth: 5,
+      barRadius: 5,
     });
 
     wavesurfer.load(voiceUrl);
@@ -963,12 +963,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Initialize Wavesurfer
       const wavesurfer = WaveSurfer.create({
         container: waveformContainer,
-        waveColor: "#34b7f1",
+        waveColor: "#666",
         progressColor: "#075e54",
-        cursorWidth: 0,
-        height: 48,
-        barWidth: 2,
-        barRadius: 2,
+        cursorWidth: 2,
+        height: 30,
+        barWidth: 5,
+        barRadius: 5,
       });
 
       wavesurfer.load(note.url);
