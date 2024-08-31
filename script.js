@@ -663,7 +663,6 @@ document.addEventListener("DOMContentLoaded", function () {
       passwordSetupModal.style.display = "block";
     } else {
       passwordVerificationModal.style.display = "block";
-      loadVoiceNotes();
     }
   });
 
@@ -706,6 +705,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Optionally, show a message or redirect
     alert("Password has been reset and all voice notes have been deleted.");
+
+    this.location.reload();
   });
 
   // When the user clicks on <span> (x), close the modal
@@ -853,91 +854,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Convert the Blob to base64 and save it
     blobToBase64(currentVoiceBlob, function (base64Data) {
-      const listItem = document.createElement("li");
-      listItem.classList.add("voice-note-item");
-
-      // Create a container for the audio controls
-      const audioContainer = document.createElement("div");
-      audioContainer.className = "saved-audio-container";
-      listItem.appendChild(audioContainer);
-
-      // Play/Pause button styled like WhatsApp
-      const playPauseBtn = document.createElement("div");
-      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      playPauseBtn.className = "play-pause-btn";
-      audioContainer.appendChild(playPauseBtn);
-
-      // Create a container for the waveform
-      const waveformContainer = document.createElement("div");
-      waveformContainer.className = "waveform";
-      audioContainer.appendChild(waveformContainer);
-
-      // Current time display styled like WhatsApp
-      const currentTimeDisplay = document.createElement("span");
-      currentTimeDisplay.className = "current-time-display";
-      audioContainer.appendChild(currentTimeDisplay);
-
-      // Initialize Wavesurfer
-      const wavesurfer = WaveSurfer.create({
-        container: waveformContainer,
-        waveColor: "#666",
-        progressColor: "#075e54",
-        cursorWidth: 0,
-        height: 30,
-        barWidth: 5,
-        barRadius: 5,
-      });
-
-      wavesurfer.load(URL.createObjectURL(currentVoiceBlob));
-
-      // Handle Play/Pause toggle with icon change
-      playPauseBtn.addEventListener("click", () => {
-        if (wavesurfer.isPlaying()) {
-          wavesurfer.pause();
-          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-          wavesurfer.play();
-          playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-      });
-
-      // Update the current time display
-      wavesurfer.on("audioprocess", () => {
-        const currentTime = wavesurfer.getCurrentTime();
-        currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
-      });
-
-      // Reset the play/pause button when the audio finishes playing
-      wavesurfer.on("finish", () => {
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      });
-
-      const titleSpan = document.createElement("span");
-      titleSpan.classList.add("title");
-      titleSpan.textContent = title;
-      listItem.appendChild(titleSpan);
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("delete-btn");
-      deleteBtn.textContent = "Delete";
-
-      deleteBtn.addEventListener("click", function () {
-        voiceNoteList.removeChild(listItem);
-        const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
-        const updatedNotes = voiceNotes.filter((n) => n.title !== title);
-        localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
-      });
-
-      listItem.appendChild(deleteBtn);
-      voiceNoteList.appendChild(listItem);
-
       const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
       voiceNotes.push({ title, base64: base64Data });
       localStorage.setItem("voiceNotes", JSON.stringify(voiceNotes));
 
+      addVoiceNoteToList(title, base64Data);
       resetVoiceNote();
     });
   });
+
+  // Function to add a voice note to the list
+  function addVoiceNoteToList(title, base64Data) {
+    const listItem = document.createElement("li");
+    listItem.classList.add("voice-note-item");
+
+    // Create a container for the audio controls
+    const audioContainer = document.createElement("div");
+    audioContainer.className = "saved-audio-container";
+    listItem.appendChild(audioContainer);
+
+    // Play/Pause button styled like WhatsApp
+    const playPauseBtn = document.createElement("div");
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    playPauseBtn.className = "play-pause-btn";
+    audioContainer.appendChild(playPauseBtn);
+
+    // Create a container for the waveform
+    const waveformContainer = document.createElement("div");
+    waveformContainer.className = "waveform";
+    audioContainer.appendChild(waveformContainer);
+
+    // Current time display styled like WhatsApp
+    const currentTimeDisplay = document.createElement("span");
+    currentTimeDisplay.className = "current-time-display";
+    audioContainer.appendChild(currentTimeDisplay);
+
+    // Initialize Wavesurfer
+    const wavesurfer = WaveSurfer.create({
+      container: waveformContainer,
+      waveColor: "#666",
+      progressColor: "#075e54",
+      cursorWidth: 0,
+      height: 30,
+      barWidth: 5,
+      barRadius: 5,
+    });
+
+    wavesurfer.load(base64Data);
+
+    // Handle Play/Pause toggle with icon change
+    playPauseBtn.addEventListener("click", () => {
+      if (wavesurfer.isPlaying()) {
+        wavesurfer.pause();
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      } else {
+        wavesurfer.play();
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+    });
+
+    // Update the current time display
+    wavesurfer.on("audioprocess", () => {
+      const currentTime = wavesurfer.getCurrentTime();
+      currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
+    });
+
+    // Reset the play/pause button when the audio finishes playing
+    wavesurfer.on("finish", () => {
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    });
+
+    const titleSpan = document.createElement("span");
+    titleSpan.classList.add("title");
+    titleSpan.textContent = title;
+    listItem.appendChild(titleSpan);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.textContent = "Delete";
+
+    deleteBtn.addEventListener("click", function () {
+      voiceNoteList.removeChild(listItem);
+      const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+      const updatedNotes = voiceNotes.filter((n) => n.title !== title);
+      localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+    });
+
+    listItem.appendChild(deleteBtn);
+    voiceNoteList.appendChild(listItem);
+  }
 
   // Function to load and display saved voice notes
   function loadVoiceNotes() {
@@ -945,77 +950,7 @@ document.addEventListener("DOMContentLoaded", function () {
     voiceNoteList.innerHTML = ""; // Clear the list
 
     voiceNotes.forEach((note) => {
-      const listItem = document.createElement("li");
-      listItem.classList.add("voice-note-item");
-
-      const audioContainer = document.createElement("div");
-      audioContainer.className = "saved-audio-container";
-      listItem.appendChild(audioContainer);
-
-      const playPauseBtn = document.createElement("div");
-      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      playPauseBtn.className = "play-pause-btn";
-      audioContainer.appendChild(playPauseBtn);
-
-      const waveformContainer = document.createElement("div");
-      waveformContainer.className = "waveform";
-      audioContainer.appendChild(waveformContainer);
-
-      const currentTimeDisplay = document.createElement("span");
-      currentTimeDisplay.className = "current-time-display";
-      audioContainer.appendChild(currentTimeDisplay);
-
-      const blob = fetch(note.base64).then((res) => res.blob());
-      const voiceUrl = URL.createObjectURL(blob);
-
-      const wavesurfer = WaveSurfer.create({
-        container: waveformContainer,
-        waveColor: "#666",
-        progressColor: "#075e54",
-        cursorWidth: 0,
-        height: 30,
-        barWidth: 5,
-        barRadius: 5,
-      });
-
-      wavesurfer.load(voiceUrl);
-
-      playPauseBtn.addEventListener("click", () => {
-        if (wavesurfer.isPlaying()) {
-          wavesurfer.pause();
-          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-          wavesurfer.play();
-          playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-      });
-
-      wavesurfer.on("audioprocess", () => {
-        const currentTime = wavesurfer.getCurrentTime();
-        currentTimeDisplay.innerHTML = `${Math.floor(currentTime)}s`;
-      });
-
-      wavesurfer.on("finish", () => {
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      });
-
-      const titleSpan = document.createElement("span");
-      titleSpan.classList.add("title");
-      titleSpan.textContent = note.title;
-      listItem.appendChild(titleSpan);
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("delete-btn");
-      deleteBtn.textContent = "Delete";
-
-      deleteBtn.addEventListener("click", function () {
-        voiceNoteList.removeChild(listItem);
-        const updatedNotes = voiceNotes.filter((n) => n.title !== note.title);
-        localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
-      });
-
-      listItem.appendChild(deleteBtn);
-      voiceNoteList.appendChild(listItem);
+      addVoiceNoteToList(note.title, note.base64);
     });
   }
 
@@ -1026,4 +961,9 @@ document.addEventListener("DOMContentLoaded", function () {
     saveVoiceNoteBtn.disabled = true;
     currentVoiceBlob = null;
   }
+
+  // Load voice notes when the page is loaded
+  window.onload = function () {
+    loadVoiceNotes();
+  };
 });
