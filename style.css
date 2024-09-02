@@ -1,4 +1,4 @@
-/*-----Import FontAwesome icons-----*/
+/*>>>>>>>>>>Import FontAwesome icons>>>>>>>>>>>>*/
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
 
 /*----- Global styling for all elements----- */
@@ -9,45 +9,52 @@
   box-sizing: border-box;
 }
 
-/*-----Basic styling for the body-----*/
+/*>>>>>>>>>>>Basic styling for the body>>>>>>>>>>>*/
 body {
   background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
   color: #333;
 }
-/*-----scrollbar-----*/
+
+/*>>>>>>>>>>>scrollbar>>>>>>>>>>>*/
 body::-webkit-scrollbar,
 .about-section::-webkit-scrollbar,
 .right-container::-webkit-scrollbar,
 .scroll-container::-webkit-scrollbar,
 .modal-content::-webkit-scrollbar,
-.deleted-notes-scroll::-webkit-scrollbar {
+.deleted-notes-scroll::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+.voice-note-scroll-container::-webkit-scrollbar {
   width: 8px;
   border-radius: 20px;
 }
 
-/*-----track-----*/
+/*>>>>>>>>>>>track>>>>>>>>>>>*/
 body::-webkit-scrollbar-track,
 .about-section::-webkit-scrollbar-track,
 .right-container::-webkit-scrollbar-track,
 .scroll-container::-webkit-scrollbar-track,
 .modal-content::-webkit-scrollbar-track,
-.deleted-notes-scroll::-webkit-scrollbar-track {
+.deleted-notes-scroll::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track,
+.voice-note-scroll-container::-webkit-scrollbar-track {
   background: #deeafb;
   border-radius: 20px;
 }
 
-/*-----thumb------*/
+/*>>>>>>>>>>>thumb>>>>>>>>>>>*/
 body::-webkit-scrollbar-thumb,
 .about-section::-webkit-scrollbar-thumb,
 .right-container::-webkit-scrollbar-thumb,
 .scroll-container::-webkit-scrollbar-thumb,
 .modal-content::-webkit-scrollbar-thumb,
-.deleted-notes-scroll::-webkit-scrollbar-thumb {
+.deleted-notes-scroll::-webkit-scrollbar-thumb,
+.left-container textarea::-webkit-scrollbar-thumb,
+.voice-note-scroll-container::-webkit-scrollbar-thumb {
   background-image: linear-gradient(#cff6fc, #20bcf2);
   border-radius: 20px;
 }
 
-/*-----Styling for the header container-----*/
+/*>>>>>>>>>>>Styling for the header container>>>>>>>>>>>*/
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -56,7 +63,6 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
   border-radius: 15px;
-  color: white;
   position: fixed;
   top: 10px;
   left: 50%;
@@ -66,7 +72,7 @@ body::-webkit-scrollbar-thumb,
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/*-----Styling for the header text-----*/
+/*>>>>>>>>>>>Styling for the header text>>>>>>>>>>>*/
 .header-container h1 {
   font-size: 24px;
   color: #1976d2;
@@ -78,13 +84,13 @@ body::-webkit-scrollbar-thumb,
   gap: 10px;
 }
 
-/*-----Styling for the search container-----*/
+/*>>>>>>>>>>>Styling for the search container>>>>>>>>>>>*/
 .search-container {
   display: flex;
   align-items: center;
 }
 
-/*-----Styling for the search input field-----*/
+/*>>>>>>>>>>>Styling for the search input field>>>>>>>>>>>*/
 .search-container input {
   padding: 10px;
   border: none;
@@ -95,24 +101,23 @@ body::-webkit-scrollbar-thumb,
   color: #333;
 }
 
-/*-----Styling for the heade button-----*/
+/*>>>>>>>>>>>Styling for the header button>>>>>>>>>>>*/
 .search-container button {
   background: none;
   border: none;
-  color: white;
   cursor: pointer;
   font-size: 20px;
   margin-left: 10px;
   border-radius: 5px;
 }
 
-/*-----Styling for the moon icon------*/
+/*>>>>>>>>>>>Styling for the moon icon>>>>>>>>>>>*/
 .fa-moon {
   padding: 5px;
   color: #1976d2;
 }
 
-/*-----Main container styling-----*/
+/*>>>>>>>>>>>Main container styling>>>>>>>>>>>*/
 .main-container {
   display: flex;
   padding: 100px 20px 20px 20px;
@@ -122,7 +127,7 @@ body::-webkit-scrollbar-thumb,
   height: 100vh;
 }
 
-/*-----Styling for the left container-----*/
+/*>>>>>>>>>>>Styling for the left container>>>>>>>>>>>*/
 .left-container {
   flex: 1;
   display: flex;
@@ -136,7 +141,7 @@ body::-webkit-scrollbar-thumb,
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/*-----styling for add note container-----*/
+/*>>>>>>>>>>>styling for add note container>>>>>>>>>>>*/
 .add-note-container {
   display: flex;
   flex-direction: column;
@@ -149,7 +154,7 @@ body::-webkit-scrollbar-thumb,
   position: relative;
 }
 
-/* Styling for the note title input */
+/*>>>>>>>>>>>Styling for the note title input>>>>>>>>>>>*/
 #noteTitle {
   padding: 15px;
   border-radius: 20px 20px 0px 0px;
@@ -163,7 +168,7 @@ body::-webkit-scrollbar-thumb,
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
 
-/*-----Styling for the note content textarea-----*/
+/*>>>>>>>>>>>Styling for the note content textarea>>>>>>>>>>>*/
 .left-container textarea {
   width: 100%;
   padding: 15px;
@@ -179,7 +184,7 @@ body::-webkit-scrollbar-thumb,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
-/*------Remove outline on focus for textarea and note title-----*/
+/*>>>>>>>>>>>Remove outline on focus for textarea and note title>>>>>>>>>>>*/
 textarea:focus {
   outline: none;
 }
@@ -245,14 +250,14 @@ textarea:focus {
 .counter-container {
   align-self: flex-start;
   font-size: 12px;
-  color: #666;
+  color: #333;
   margin-left: 10px;
   padding-top: 8px;
 }
 
-/*-----Styling for about section-----*/
+/*>>>>>>>>>>>Styling for about section>>>>>>>>>>>*/
 .about-section {
-  color: #666;
+  color: #333;
   padding: 10px;
   margin-top: 30px;
   width: 100%;
@@ -262,7 +267,7 @@ textarea:focus {
 
 .about-section > h4 {
   text-align: center;
-  color: #414141;
+  color: #333;
   margin-bottom: 5px;
 }
 
@@ -280,7 +285,7 @@ textarea:focus {
 }
 
 .email-text {
-  color: #575757;
+  color: #333;
   font-weight: bold;
 }
 
@@ -290,7 +295,7 @@ textarea:focus {
   padding-top: 5px;
 }
 
-/*-----Styling for the right container-----*/
+/*>>>>>>>>>>>Styling for the right container>>>>>>>>>>>*/
 .right-container {
   flex: 2;
   background-color: rgba(255, 255, 255, 0.2);
@@ -302,20 +307,21 @@ textarea:focus {
   overflow-y: hidden;
 }
 
-/*-----Styling for headings in the right container-----*/
+/*>>>>>>>>>>>Styling for headings in the right container>>>>>>>>>>>*/
 .right-container h1 {
   margin-top: 10px;
   margin-left: 10px;
 }
 
-/*-----Styling for the scroll container container-----*/
+/*>>>>>>>>>>>Styling for the scroll container container>>>>>>>>>>>*/
 .scroll-container {
   width: 100%;
   height: 90%;
   overflow-y: auto;
+  border-radius: 10px;
 }
 
-/*-----Styling for the notes list container-----*/
+/*>>>>>>>>>>>Styling for the notes list container>>>>>>>>>>>*/
 .notesList-containter {
   column-count: 3;
   column-gap: 10px;
@@ -323,7 +329,7 @@ textarea:focus {
   padding: 10px;
 }
 
-/*------Styling for note items-----*/
+/*>>>>>>>>>>>Styling for note items>>>>>>>>>>>*/
 .note-item {
   padding: 15px;
   margin-bottom: 10px;
@@ -336,25 +342,26 @@ textarea:focus {
   overflow-wrap: break-word;
   break-inside: avoid;
   box-sizing: border-box;
+  transition: all 0.3s ease; /* Smooth transition for hiding/showing items */
 }
 
-/*-----Styling for note item headings-----*/
+/*>>>>>>>>>>>Styling for note item headings>>>>>>>>>>>*/
 .note-item > h3 {
   margin-bottom: 5px;
 }
 
-/*-----Styling for note item text-----*/
+/*>>>>>>>>>>>Styling for note item text>>>>>>>>>>>*/
 .note-item > span {
   font-size: 15px;
 }
 
-/*-----Hover effect for note items-----*/
+/*>>>>>>>>>>>Hover effect for note items>>>>>>>>>>>*/
 .note-item:hover {
   transform: translateY(-3px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/*-----Styling for icons within note items-----*/
+/*>>>>>>>>>>>Styling for icons within note items>>>>>>>>>>>*/
 .note-item .icon-btn {
   position: absolute;
   bottom: 10px;
@@ -365,12 +372,12 @@ textarea:focus {
   transition: opacity 0.3s ease;
 }
 
-/*-----Show icon buttons on note item hover-----*/
+/*>>>>>>>>>>>Show icon buttons on note item hover>>>>>>>>>>>*/
 .note-item:hover .icon-btn {
   opacity: 1;
 }
 
-/*-----Styling for individual icon buttons------*/
+/*>>>>>>>>>>>Styling for individual icon buttons>>>>>>>>>>>*/
 .note-item .fa-edit,
 .note-item .fa-trash,
 .note-item .fa-save,
@@ -382,7 +389,7 @@ textarea:focus {
   font-size: 16px;
 }
 
-/*-----Hover effect for icon buttons-----*/
+/*>>>>>>>>>>>Hover effect for icon buttons>>>>>>>>>>>*/
 .note-item .fa-edit:hover,
 .note-item .fa-trash:hover,
 .note-item .fa-save:hover,
@@ -391,7 +398,7 @@ textarea:focus {
   color: #00aeff;
 }
 
-/*-----Modal styles-----*/
+/*>>>>>>>>>>>Modal styles>>>>>>>>>>>*/
 .modal {
   display: none;
   position: fixed;
@@ -436,8 +443,8 @@ textarea:focus {
 
 .close:hover,
 .close:focus {
-  color: #000;
-  border: 3px solid #000;
+  color: #666;
+  border: 3px solid #666;
   text-decoration: none;
   cursor: pointer;
 }
@@ -446,12 +453,12 @@ textarea:focus {
   font-size: 30px;
 }
 
-/*-----Style for editable text-----*/
+/*>>>>>>>>>>>Style for editable text>>>>>>>>>>>*/
 .editable {
   outline: none;
 }
 
-/*-----Style for the deleted notes modal-----*/
+/*>>>>>>>>>>>Style for the deleted notes modal>>>>>>>>>>>*/
 .deleted-notes-modal {
   display: none;
   position: fixed;
@@ -460,15 +467,16 @@ textarea:focus {
   top: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .deleted-notes-modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
+  margin: 5% auto;
+  padding: 20px 20px 0px 20px;
   border: 1px solid #888;
   width: 60%;
-  height: 70%;
+  height: 80%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -480,22 +488,43 @@ textarea:focus {
   padding: 10px;
 }
 
+#deletedNotesList {
+  column-count: 3;
+  column-gap: 10px;
+  width: 100%;
+}
+
 .deleted-note-item {
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 15px 15px 10px 15px;
   margin-bottom: 10px;
-  border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow-wrap: break-word;
+  break-inside: avoid;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
   background: #f9f9f9;
 }
 
-.deleted-note-item i {
+.deleted-note-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.delete-recover-icons-container {
+  text-align: right;
+}
+.delete-recover-icons-container i {
+  display: inline-block;
   cursor: pointer;
   color: #333;
   padding: 5px;
   border-radius: 4px;
   font-size: 16px;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .deleted-note-item h4 {
@@ -503,16 +532,16 @@ textarea:focus {
   margin-bottom: 10px;
 }
 
-.deleted-note-item .fa-undo:hover {
+.delete-recover-icons-container .fa-undo:hover {
   color: #00aeff;
   background: #c8eeff;
 }
 
-.deleted-note-item .fa-trash-alt {
+.delete-recover-icons-container .fa-trash-alt {
   margin-left: 10px;
 }
 
-.deleted-note-item .fa-trash-alt:hover {
+.delete-recover-icons-container .fa-trash-alt:hover {
   color: #ff4c4c;
   background: #ffcccc;
 }
@@ -523,12 +552,12 @@ textarea:focus {
   padding: 10px;
   border-radius: 0px 10px 0px 10px;
   background: #1976d2;
-  color: white;
+  color: #ffffff;
 }
 
 #showDeletedNotesBtn:hover {
   background: #ff4c4c;
-  color: white;
+  color: #ffffff;
 }
 
 #recoverAllBtn,
@@ -543,25 +572,29 @@ textarea:focus {
 
 #recoverAllBtn {
   background: #00aeff;
-  color: white;
+  color: #ffffff;
   margin-right: 5px;
 }
 #recoverAllBtn:hover {
   background: #0090d3;
-  color: white;
+  color: #ffffff;
 }
 
 #deleteAllBtn {
   background: #ff4c4c;
-  color: white;
+  color: #ffffff;
 }
 
 #deleteAllBtn:hover {
   background: #d40000;
-  color: white;
+  color: #ffffff;
 }
 
-/*-----voice note Modal styles-----*/
+#searchDeteledNote {
+  margin-left: 20px;
+}
+
+/*>>>>>>>>>>>voice note Modal styles>>>>>>>>>>>*/
 .voice-note-modal {
   display: none;
   position: fixed;
@@ -575,27 +608,28 @@ textarea:focus {
   align-items: center;
 }
 
-/*-----voice note Modal content styles-----*/
+/*>>>>>>>>>>>voice note Modal content styles>>>>>>>>>>>*/
 .voice-note-modal-content {
+  display: flex;
+  flex-direction: column;
   background-color: #fefefe;
   margin: 10% auto;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   border: 1px solid #888;
   width: 60%;
-  height: 70%;
+  height: 90%;
   border-radius: 8px;
   overflow: hidden;
 }
 
-/*-----voice note Modal scroll container styles-----*/
+/*>>>>>>>>>>>voice note Modal scroll container styles>>>>>>>>>>>*/
 .voice-note-scroll-container {
-  height: 70%;
+  height: 90%;
   overflow-y: auto;
-  margin-top: 15px;
-  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
 }
 
-/*-----password Modal styles-----*/
+/*>>>>>>>>>>>password Modal styles>>>>>>>>>>>*/
 .password-modal {
   display: none;
   position: fixed;
@@ -607,7 +641,7 @@ textarea:focus {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/*-----password Modal content styles-----*/
+/*>>>>>>>>>>>password Modal content styles>>>>>>>>>>>*/
 .password-modal-content {
   background-color: #fefefe;
   margin: 15% auto;
@@ -618,61 +652,72 @@ textarea:focus {
   border-radius: 8px;
 }
 
-/*-----Recording button styles-----*/
+/*>>>>>>>>>>>Recording button styles>>>>>>>>>>>*/
 #startVoiceNoteBtn {
-  background-color: #1976d2;
-  color: #fff;
-  padding: 10px 10px;
+  background-color: #1e1e1e;
+  padding: 10px 12px;
+  border-radius: 50%;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 
 #startVoiceNoteBtn:hover {
-  background-color: #00aeff;
-}
-
-#startVoiceNoteBtn.recording {
   background-color: #ff4c4c;
 }
 
-/*-----Voice note list styles-----*/
-.voice-note-list {
-  list-style-type: none;
-  margin-top: 20px;
+#startVoiceNoteBtn.recording {
+  background-color: #dbdbdb;
+  color: #ff4c4c;
 }
 
 .voice-note-item {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-top: 5px solid #075e54;
+  transition: all 0.3s ease; /* Smooth transition for hiding/showing items */
+  overflow: hidden; /* Hide any overflow when items are collapsed */
   align-items: center;
-  justify-content: space-between;
   background-color: #f0f0f0;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.voice-note-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .voice-note-item .title {
   font-size: 16px;
   font-weight: bold;
-  flex-grow: 1;
-  margin-left: 10px;
+  order: 1;
+  width: 100%;
+  text-align: center;
 }
 
 .delete-btn {
-  background-color: #ff4c4c;
-  color: #fff;
+  background-color: #e0e0e0;
+  color: #ff4c4c;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 9px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50%;
+  order: 3;
+}
+
+.delete-btn:hover {
+  background-color: #ff4c4c;
+  color: #ffffff;
 }
 
 .custom-buttom {
   border: none;
   background: #00aeff;
-  color: white;
+  color: #ffffff;
   padding: 8px;
   border-radius: 5px;
   margin-left: 5px;
@@ -716,17 +761,15 @@ textarea:focus {
   color: #ff4c4c;
 }
 
-.Password-verify-container h3 {
+.Password-verify-container h3,
+.password-setup-container h3,
+.voice-note-modal-content h3 {
   color: #666;
 }
 
 .voice-button-container {
   display: flex;
   gap: 30px;
-}
-
-.voice-button-container .fa-microphone {
-  color: white;
 }
 
 .password-setup-container {
@@ -737,11 +780,7 @@ textarea:focus {
   gap: 20px;
 }
 
-.password-setup-container h3 {
-  color: #666;
-}
-
-.voice-inout-container {
+.voice-input-container {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -750,22 +789,18 @@ textarea:focus {
   align-items: center; /* Vertically center items */
 }
 
-.voice-inout-container #saveVoiceNoteBtn {
+.voice-input-container #saveVoiceNoteBtn {
   margin-left: -18px;
-  background-color: #1976d2;
-  color: #fff;
-  padding: 15px 15px;
+  background-color: #1e1e1e;
+  padding: 10px 12px;
+  border-radius: 50%;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 
-.voice-inout-container #saveVoiceNoteBtn:hover {
+.voice-input-container #saveVoiceNoteBtn:hover {
   background: #00aeff;
-}
-
-.stop-rec {
-  color: white;
 }
 
 #openModalBtn {
@@ -774,23 +809,23 @@ textarea:focus {
   padding: 10px;
   border-radius: 0px 0px 0px 10px;
   background: #1976d2;
-  color: white;
+  color: #ffffff;
   margin-left: 8px;
 }
 #openModalBtn:hover {
   background: #ff4c4c;
-  color: white;
+  color: #ffffff;
 }
 
-/*-----audio container-----*/
+/*>>>>>>>>>>>audio container>>>>>>>>>>>*/
 .audio-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 70%;
+  width: 50%;
   padding: 10px;
   background-color: #f0f0f0;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -800,7 +835,11 @@ textarea:focus {
   font-size: 24px;
   color: #075e54;
   cursor: pointer;
-  margin-right: 10px;
+  width: 50px; /* Set a fixed width */
+  height: 50px; /* Set a fixed height */
+  display: inline-block;
+  text-align: center;
+  line-height: 50px; /* Match the button's height for centering the icon */
 }
 
 #waveform,
@@ -819,24 +858,69 @@ textarea:focus {
   text-align: right;
 }
 
-/*-----save voice notes-----*/
+/*>>>>>>>>>>>save voice notes>>>>>>>>>>>*/
 
 .saved-audio-container {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  margin-right: 10px;
+  order: 2;
+  width: 100%;
 }
 
-.delete-btn:hover {
-  background-color: #ff1a1a;
-}
 #recordedVoiceNote {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-/*-----Responsive styling for devices with max-width of 768px-----*/
+
+span.close.close-voice-note-modal {
+  max-width: 26.52px;
+  align-self: flex-end;
+}
+
+.searchInput {
+  align-self: center;
+  max-width: 200px;
+  margin: 10px 0px 10px 0px;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.voice-note-list {
+  padding: 10px;
+  column-count: 2;
+  column-gap: 10px;
+  width: 100%;
+}
+
+#voiceNoteTitle {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/*>>>>>>>>>>>Blinking animation>>>>>>>>>>>*/
+@keyframes blinking {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*>>>>>>>>>>>Apply the blinking animation>>>>>>>>>>>*/
+.blinking-recording {
+  animation: blinking 1s infinite;
+}
+
+/*>>>>>>>>>>>Responsive styling for devices with max-width of 768px>>>>>>>>>>>*/
 @media (max-width: 768px) {
   body::-webkit-scrollbar,
   .about-section::-webkit-scrollbar,
@@ -934,7 +1018,7 @@ textarea:focus {
   }
 
   .modal-content {
-    background-color: #fff;
+    background-color: #ffffff;
     margin: 10% auto;
     padding: 20px;
     width: 90%;
@@ -945,8 +1029,19 @@ textarea:focus {
     border-radius: 8px;
   }
   .deleted-notes-modal-content {
-    margin: 30% auto;
+    margin: 19% auto;
     width: 80%;
+    height: 85%;
+  }
+
+  #deletedNotesList {
+    column-count: 1;
+    column-gap: 10px;
+    width: 100%;
+  }
+
+  #searchDeteledNote {
+    margin: 10px 0px 0px 10px;
   }
 
   .password-modal-content {
@@ -957,33 +1052,17 @@ textarea:focus {
   /* voice note Modal content styles */
   .voice-note-modal-content {
     background-color: #fefefe;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    height: 70%;
+    height: 85%;
     border-radius: 8px;
     overflow: hidden;
   }
 
-  /* Recording button styles */
-  #startVoiceNoteBtn {
-    background-color: #1976d2;
-    color: #fff;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .voice-inout-container #saveVoiceNoteBtn {
-    margin-left: -18px;
-    background-color: #1976d2;
-    color: #fff;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .voice-note-item {
+    padding: 10px;
   }
 
   .audio-container {
@@ -994,29 +1073,26 @@ textarea:focus {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 
-  .voice-note-item {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .voice-note-item .title {
-    order: 1;
-    width: 100%;
-    text-align: center;
-  }
-
-  .saved-audio-container {
-    order: 2;
+  .voice-note-list {
+    padding: 10px;
+    column-count: 1;
+    column-gap: 10px;
     width: 100%;
   }
 
-  .delete-btn {
-    order: 3;
-    width: 70%;
+  .searchInput {
+    max-width: 150px;
+    margin: 10px 0px 10px 0px;
+    padding: 6px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background-color: #f0f0f0;
+    color: #333;
   }
 }
 
-/*-----Dark mode styling------*/
+/*>>>>>>>>>>>Dark mode styling>>>>>>>>>>>*/
 body.dark-mode .main-container {
   background-color: #1e1e1e;
   color: #e0e0e0;
@@ -1090,7 +1166,7 @@ body.dark-mode .left-container .send-icon:hover {
   background-color: rgba(80, 80, 80, 0.8);
 }
 
-/*-----Dark Mode Scrollbar-----*/
+/*>>>>>>>>>>>Dark Mode Scrollbar>>>>>>>>>>>*/
 .dark-mode body::-webkit-scrollbar-track,
 .dark-mode .about-section::-webkit-scrollbar-track,
 .dark-mode .right-container::-webkit-scrollbar-track,
@@ -1098,11 +1174,6 @@ body.dark-mode .left-container .send-icon:hover {
 .dark-mode .modal-content::-webkit-scrollbar-track,
 .dark-mode .deleted-notes-scroll::-webkit-scrollbar-track {
   background: #333333;
-}
-
-body.dark-mode .modal-content .close:hover {
-  color: white;
-  border: 3px solid white;
 }
 
 body.dark-mode .about-section {
@@ -1124,19 +1195,19 @@ body.dark-mode .left-container .counter-container {
 }
 
 body.dark-mode .header-container h1 {
-  color: white;
+  color: #ffffff;
 }
 body.dark-mode .header-container .fa-moon {
-  color: white;
+  color: #ffffff;
 }
 
 body.dark-mode .left-container .fa-microphone {
-  color: white;
+  color: #ffffff;
 }
 
 body.dark-mode .custom-input {
   background: #333333;
-  color: white;
+  color: #ffffff;
 }
 
 body.dark-mode .custom-input:focus {
@@ -1144,5 +1215,29 @@ body.dark-mode .custom-input:focus {
 }
 
 body.dark-mode .audio-container {
-  background: #1f1f1f;
+  background: #272727;
+}
+
+body.dark-mode .searchInput {
+  background-color: #3d3d3d;
+  color: #ffffff;
+}
+
+body.dark-mode #saveVoiceNoteBtn {
+  background-color: #f5f5f5;
+  color: #1e1e1e;
+}
+
+body.dark-mode #startVoiceNoteBtn {
+  background-color: #f5f5f5;
+  color: #1e1e1e;
+}
+
+body.dark-mode #startVoiceNoteBtn:hover {
+  background-color: #ff4c4c;
+}
+
+body.dark-mode #startVoiceNoteBtn.recording {
+  background-color: #333333;
+  color: #ff4c4c;
 }

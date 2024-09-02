@@ -14,6 +14,7 @@
 
     <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css" />
+
     <!-- Link to Google Fonts for the Roboto font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -147,6 +148,12 @@
         <h2>Deleted Notes</h2>
         <button id="recoverAllBtn">Recover All</button>
         <button id="deleteAllBtn">Delete All</button>
+        <input
+          type="text"
+          class="searchInput"
+          id="searchDeteledNote"
+          placeholder="Search voice notes..."
+        />
         <div class="deleted-notes-scroll">
           <div id="deletedNotesList"></div>
         </div>
@@ -201,31 +208,39 @@
     <div id="voiceNoteModal" class="voice-note-modal">
       <div class="voice-note-modal-content">
         <span class="close close-voice-note-modal">&times;</span>
-        <div class="voice-inout-container">
+        <div class="voice-input-container">
           <h3>Record Your Voice Note</h3>
           <input
             type="text"
             id="voiceNoteTitle"
-            placeholder="Enter Title"
+            placeholder="Note Title..."
             class="custom-input"
           />
           <div class="voice-button-container">
             <button id="startVoiceNoteBtn">
-              <i class="fas fa-microphone"></i> Start Recording
+              <span class="material-symbols-outlined">mic</span>
             </button>
-            <button id="saveVoiceNoteBtn" disabled>Save Voice Note</button>
+            <button id="saveVoiceNoteBtn" disabled>
+              <span class="material-symbols-outlined">send</span>
+            </button>
           </div>
           <div id="recordedVoiceNote"></div>
         </div>
+        <input
+          type="text"
+          class="searchInput"
+          id="searchVoiceNote"
+          placeholder="Search voice notes..."
+        />
         <div class="voice-note-scroll-container">
           <!-- Voice Note List -->
-          <ul id="voiceNoteList" class="voice-note-list"></ul>
+          <div id="voiceNoteList" class="voice-note-list"></div>
         </div>
       </div>
     </div>
 
     <!-- Link to external JavaScript files -->
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
     <script src="https://unpkg.com/wavesurfer.js"></script>
   </body>
 </html>

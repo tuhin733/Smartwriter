@@ -1,3 +1,4 @@
+import { showToast } from "./utils/toast.js";
 document.addEventListener("DOMContentLoaded", function () {
   // <------------------------------ ELEMENTS START ------------------------------->
 
@@ -74,20 +75,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const noteTitleText = noteTitle.value.trim();
 
     // <---------- Check if both title and text are not empty ----------->
-    if (noteTitleText !== "" && noteText !== "") {
-      const note = {
-        title: noteTitleText,
-        text: noteText,
-        imageUrl: currentImageUrl, // Save image URL with the note
-      };
-      savedNotes.push(note); // Add note to the saved notes array
-      localStorage.setItem("notes", JSON.stringify(savedNotes)); // Save notes to local storage
-      addNoteToList(note, savedNotes.length - 1); // Add note to the list on the page
-      noteInput.value = ""; // Clear note input field
-      noteTitle.value = ""; // Clear note title field
-      currentImageUrl = null; // Reset the current image URL
-      imagePreviewContainer.style.display = "none"; // Hide the image preview
+    if (noteTitleText === "" && noteText === "") {
+      showToast("Title and text cannot be empty.", "#212529", "#ffc107");
+      return;
     }
+
+    // <---------- Check if either title or text is empty ----------->
+
+    if (noteTitleText === "") {
+      showToast("Title cannot be empty.", "#212529", "#ffc107");
+      return;
+    }
+
+    if (noteText === "") {
+      showToast("Text cannot be empty.", "#212529", "#ffc107");
+      return;
+    }
+
+    // <---------- Additional validation ----------->
+    if (noteTitleText.length > 60) {
+      showToast("Title cannot exceed 50 characters.", "#ffffff", "#dc3545");
+      return;
+    }
+
+    if (noteText.length > 500) {
+      showToast("Note cannot exceed 500 characters.", "#ffffff", "#dc3545");
+      return;
+    }
+
+    const isDuplicate = savedNotes.some(
+      (note) => note.title.toLowerCase() === noteTitleText.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      showToast(
+        "Note title already exists. Please use a different title.",
+        "#212529",
+        "#ffc107"
+      );
+      return;
+    }
+
+    const note = {
+      title: noteTitleText,
+      text: noteText,
+      imageUrl: currentImageUrl, // Save image URL with the note
+    };
+    savedNotes.push(note); // Add note to the saved notes array
+    localStorage.setItem("notes", JSON.stringify(savedNotes)); // Save notes to local storage
+    addNoteToList(note, savedNotes.length - 1); // Add note to the list on the page
+    noteInput.value = ""; // Clear note input field
+    noteTitle.value = ""; // Clear note title field
+    currentImageUrl = null; // Reset the current image URL
+    imagePreviewContainer.style.display = "none"; // Hide the image preview
   });
 
   // <---------- Handle image upload ----------->
@@ -98,6 +138,21 @@ document.addEventListener("DOMContentLoaded", function () {
   imageInput.addEventListener("change", function () {
     const file = imageInput.files[0];
     if (file) {
+      // Validate file type
+      const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+      if (!validImageTypes.includes(file.type)) {
+        showToast("Please upload a valid image file.", "#ffffff", "#dc3545");
+        imageInput.value = ""; // Reset file input
+        return;
+      }
+
+      // Validate file size
+      if (file.size > 5 * 1024 * 1024) {
+        // 5MB limit
+        showToast("File size exceeds 5MB.", "#ffffff", "#dc3545");
+        fileInput.value = ""; // Reset file input
+        return;
+      }
       const reader = new FileReader();
       reader.onload = function (e) {
         currentImageUrl = e.target.result; // Save the image data URL to be used later
@@ -398,7 +453,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   } else {
-    alert("Your browser doesn't support speech recognition.");
+    showToast(
+      "Your browser doesn't support speech recognition.",
+      "#ffffff",
+      "#dc3545"
+    );
   }
 
   // <---------- Function to delete note from local storage ----------->
@@ -446,6 +505,10 @@ document.addEventListener("DOMContentLoaded", function () {
       div.appendChild(noteTitle);
       div.appendChild(noteText);
 
+      // Create a container div for the icons
+      const iconsCont = document.createElement("div");
+      iconsCont.className = "delete-recover-icons-container"; // Add a class for styling
+
       const recoverIcon = document.createElement("i");
       recoverIcon.className = "fas fa-undo";
       recoverIcon.title = "Recover";
@@ -460,8 +523,13 @@ document.addEventListener("DOMContentLoaded", function () {
         permanentDeleteFromStorage(index);
       });
 
-      div.appendChild(recoverIcon);
-      div.appendChild(permanentDeleteIcon);
+      // Append icons to the icon container
+      iconsCont.appendChild(recoverIcon);
+      iconsCont.appendChild(permanentDeleteIcon);
+
+      // Append the icon container to the main div
+      div.appendChild(iconsCont);
+
       deletedNotesList.appendChild(div);
     });
 
@@ -667,24 +735,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // <---------- save password ----------->
   savePasswordBtn.addEventListener("click", () => {
-    const setupPassword = document.getElementById("setupPassword").value;
+    const setupPasswordInput = document.getElementById("setupPassword");
+    const setupPassword = setupPasswordInput.value;
+
     if (setupPassword) {
       localStorage.setItem("voiceNotePassword", setupPassword);
-      document.getElementById("passwordSetupModal").style.display = "none";
-      document.getElementById("voiceNoteModal").style.display = "flex";
+      showToast("Password set successfully!", "#ffffff", "#28a745");
+
+      // Clear the input field
+      setupPasswordInput.value = "";
+
+      setTimeout(() => {
+        document.getElementById("passwordSetupModal").style.display = "none";
+        document.getElementById("voiceNoteModal").style.display = "flex";
+      }, 3000); // Wait for toast duration before redirecting
     }
   });
 
   // <---------- Verify Password ----------->
   verifyPasswordBtn.addEventListener("click", () => {
-    const verifyPassword = document.getElementById("verifyPassword").value;
+    const verifyPasswordElement = document.getElementById("verifyPassword");
+    const verifyPassword = verifyPasswordElement.value;
     const savedPassword = localStorage.getItem("voiceNotePassword");
+    const passwordError = document.getElementById("passwordError");
+
     if (verifyPassword === savedPassword) {
       document.getElementById("passwordVerificationModal").style.display =
         "none";
       document.getElementById("voiceNoteModal").style.display = "flex";
+      // Clear the textarea content
+      verifyPasswordElement.value = "";
     } else {
-      document.getElementById("passwordError").style.display = "block";
+      passwordError.style.display = "block";
+      setTimeout(() => {
+        passwordError.style.display = "none";
+      }, 3000);
+      // Clear the textarea content
+      verifyPasswordElement.value = "";
     }
   });
 
@@ -738,7 +825,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         startVoiceNoteBtn.classList.add("recording");
         startVoiceNoteBtn.innerHTML =
-          '<i class="fas fa-stop stop-rec"></i> Stop Recording';
+          '<span class="material-symbols-outlined blinking-recording">mic</span>';
 
         mediaRecorder.ondataavailable = function (event) {
           voiceChunks.push(event.data);
@@ -810,7 +897,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
       })
       .catch(function (err) {
-        alert("Could not start recording: " + err.message);
+        showToast("Could not start recording: ", "#ffffff", "#dc3545");
       });
   }
 
@@ -822,7 +909,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     startVoiceNoteBtn.classList.remove("recording");
     startVoiceNoteBtn.innerHTML =
-      '<i class="fas fa-microphone"></i> Start Recording';
+      '<span class="material-symbols-outlined">mic</span>';
   }
 
   // <---------- Toggle recording state when the button is clicked ----------->
@@ -847,7 +934,11 @@ document.addEventListener("DOMContentLoaded", function () {
   saveVoiceNoteBtn.addEventListener("click", function () {
     const title = voiceNoteTitleInput.value.trim();
     if (!title || !currentVoiceBlob) {
-      alert("Please enter a title and record a voice note.");
+      showToast(
+        "Please enter a title and record a voice note.",
+        "#ffffff",
+        "#dc3545"
+      );
       return;
     }
 
@@ -864,7 +955,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // <---------- Function to add voice note to the list ----------->
   function addVoiceNoteToList(title, base64Data) {
-    const listItem = document.createElement("li");
+    const listItem = document.createElement("div");
     listItem.classList.add("voice-note-item");
 
     // Create a container for the audio controls
@@ -930,7 +1021,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("delete-btn");
-    deleteBtn.textContent = "Delete";
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
     deleteBtn.addEventListener("click", function () {
       voiceNoteList.removeChild(listItem);
@@ -965,4 +1056,24 @@ document.addEventListener("DOMContentLoaded", function () {
   window.onload = function () {
     loadVoiceNotes();
   };
+
+  // <---------- voice note search functionality ----------->
+  document
+    .getElementById("searchVoiceNote")
+    .addEventListener("input", function () {
+      const filter = this.value.toLowerCase();
+      const notesList = document.getElementById("voiceNoteList");
+      const notes = notesList.getElementsByClassName("voice-note-item");
+
+      Array.from(notes).forEach((note) => {
+        const title = note
+          .getElementsByClassName("title")[0]
+          .textContent.toLowerCase();
+        if (title.includes(filter)) {
+          note.style.display = "";
+        } else {
+          note.style.display = "none";
+        }
+      });
+    });
 });
