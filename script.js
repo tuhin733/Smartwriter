@@ -497,6 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
       div.className = "deleted-note-item";
 
       const noteTitle = document.createElement("h4");
+      noteTitle.className = "title";
       noteTitle.textContent = note.title;
 
       const noteText = document.createElement("p");
@@ -816,6 +817,10 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // <---------- Function to start recording a voice note ----------->
+  const micIcon = document.getElementById("micIcon");
+  const waveContainer = document.getElementById("waveContainer");
+  const bodyElement = document.body;
+
   function startVoiceNoteRecording() {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
@@ -823,13 +828,16 @@ document.addEventListener("DOMContentLoaded", function () {
         mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.start();
 
+        // Update button for recording
         startVoiceNoteBtn.classList.add("recording");
-        startVoiceNoteBtn.innerHTML =
-          '<span class="material-symbols-outlined blinking-recording">mic</span>';
+        micIcon.style.display = "none";
+        waveContainer.style.display = "flex";
+        startVoiceNoteBtn.style.backgroundColor = "transparent";
 
         mediaRecorder.ondataavailable = function (event) {
           voiceChunks.push(event.data);
         };
+
         mediaRecorder.onstop = function () {
           currentVoiceBlob = new Blob(voiceChunks, { type: "audio/mp3" });
           voiceChunks = [];
@@ -871,7 +879,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           wavesurfer.load(voiceUrl);
 
-          // <---------- Handle Play/Pause toggle with icon change ----------->
+          // Handle Play/Pause toggle with icon change
           playPauseBtn.addEventListener("click", () => {
             if (wavesurfer.isPlaying()) {
               wavesurfer.pause();
@@ -901,17 +909,22 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // <---------- Function to stop recording ----------->
   function stopVoiceNoteRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
     }
 
+    // Update button to show icon and hide animation
     startVoiceNoteBtn.classList.remove("recording");
-    startVoiceNoteBtn.innerHTML =
-      '<span class="material-symbols-outlined">mic</span>';
+    micIcon.style.display = "block";
+    waveContainer.style.display = "none";
+    // Check if dark mode is on and adjust colors
+    if (bodyElement.classList.contains("dark-mode")) {
+      startVoiceNoteBtn.style.backgroundColor = "#f5f5f5"; // Dark mode wave color
+    } else {
+      startVoiceNoteBtn.style.backgroundColor = "#1e1e1e"; // Light mode wave color
+    }
   }
-
   // <---------- Toggle recording state when the button is clicked ----------->
   startVoiceNoteBtn.addEventListener("click", function () {
     if (mediaRecorder && mediaRecorder.state === "recording") {
@@ -1064,6 +1077,26 @@ document.addEventListener("DOMContentLoaded", function () {
       const filter = this.value.toLowerCase();
       const notesList = document.getElementById("voiceNoteList");
       const notes = notesList.getElementsByClassName("voice-note-item");
+
+      Array.from(notes).forEach((note) => {
+        const title = note
+          .getElementsByClassName("title")[0]
+          .textContent.toLowerCase();
+        if (title.includes(filter)) {
+          note.style.display = "";
+        } else {
+          note.style.display = "none";
+        }
+      });
+    });
+
+  // <---------- Deleted note search functionality ----------->
+  document
+    .getElementById("searchDeteledNote")
+    .addEventListener("input", function () {
+      const filter = this.value.toLowerCase();
+      const notesList = document.getElementById("deletedNotesList");
+      const notes = notesList.getElementsByClassName("deleted-note-item");
 
       Array.from(notes).forEach((note) => {
         const title = note

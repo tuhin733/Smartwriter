@@ -666,11 +666,6 @@ textarea:focus {
   background-color: #ff4c4c;
 }
 
-#startVoiceNoteBtn.recording {
-  background-color: #dbdbdb;
-  color: #ff4c4c;
-}
-
 .voice-note-item {
   display: flex;
   flex-direction: column;
@@ -902,22 +897,54 @@ span.close.close-voice-note-modal {
   font-weight: bold;
 }
 
-/*>>>>>>>>>>>Blinking animation>>>>>>>>>>>*/
-@keyframes blinking {
+/* Add these styles to your existing CSS */
+
+#waveContainer {
+  display: none; /* Hide wave container initially */
+  bottom: -20px;
+}
+
+.wave-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.wave {
+  width: 10px;
+  height: 20px;
+  background-color: #333;
+  margin: 0 3px;
+  border-radius: 5px;
+  animation: wave-animation 1s infinite ease-in-out;
+}
+
+.wave:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.wave:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes wave-animation {
   0% {
-    opacity: 1;
+    transform: scaleY(1);
   }
   50% {
-    opacity: 0.3;
+    transform: scaleY(2);
   }
   100% {
-    opacity: 1;
+    transform: scaleY(1);
   }
 }
 
-/*>>>>>>>>>>>Apply the blinking animation>>>>>>>>>>>*/
-.blinking-recording {
-  animation: blinking 1s infinite;
+.recording #micIcon {
+  display: none; /* Hide mic icon during recording */
+}
+
+.recording #waveContainer {
+  display: flex; /* Show wave container during recording */
 }
 
 /*>>>>>>>>>>>Responsive styling for devices with max-width of 768px>>>>>>>>>>>*/
@@ -1029,9 +1056,11 @@ span.close.close-voice-note-modal {
     border-radius: 8px;
   }
   .deleted-notes-modal-content {
-    margin: 19% auto;
-    width: 80%;
-    height: 85%;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0px;
   }
 
   #deletedNotesList {
@@ -1052,12 +1081,12 @@ span.close.close-voice-note-modal {
   /* voice note Modal content styles */
   .voice-note-modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 0px;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    height: 85%;
-    border-radius: 8px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
     overflow: hidden;
   }
 
@@ -1237,7 +1266,6 @@ body.dark-mode #startVoiceNoteBtn:hover {
   background-color: #ff4c4c;
 }
 
-body.dark-mode #startVoiceNoteBtn.recording {
-  background-color: #333333;
-  color: #ff4c4c;
+body.dark-mode .wave {
+  background-color: #f5f5f5;
 }
