@@ -418,6 +418,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let recognition;
   let isRecording = false; // Track the recording state
 
+  const microphoneShowHideIcon = startRecording.querySelector(".fa-microphone");
+  const showWaves = document.getElementById("showWaveContainer");
+
   if ("webkitSpeechRecognition" in window) {
     recognition = new webkitSpeechRecognition();
     recognition.lang = "en-US";
@@ -432,15 +435,19 @@ document.addEventListener("DOMContentLoaded", function () {
     recognition.onstart = function () {
       isRecording = true;
       startRecording.classList.add("recording");
-      startRecording.innerHTML = '<i class="fas fa-stop"></i>'; // Change icon to stop
-      startRecording.style.color = "#ff4c4c";
+
+      // Hide microphone icon and show wave animation
+      microphoneShowHideIcon.style.display = "none";
+      showWaves.style.display = "flex";
     };
 
     recognition.onend = function () {
       isRecording = false;
       startRecording.classList.remove("recording");
-      startRecording.innerHTML = '<i class="fas fa-microphone"></i>'; // Change icon to start
-      startRecording.style.color = "#666";
+
+      // Show microphone icon and hide wave animation
+      microphoneShowHideIcon.style.display = "block";
+      showWaves.style.display = "none";
     };
 
     startRecording.addEventListener("click", function () {
@@ -819,7 +826,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // <---------- Function to start recording a voice note ----------->
   const micIcon = document.getElementById("micIcon");
   const waveContainer = document.getElementById("waveContainer");
-  const bodyElement = document.body;
 
   function startVoiceNoteRecording() {
     navigator.mediaDevices
@@ -832,7 +838,6 @@ document.addEventListener("DOMContentLoaded", function () {
         startVoiceNoteBtn.classList.add("recording");
         micIcon.style.display = "none";
         waveContainer.style.display = "flex";
-        startVoiceNoteBtn.style.backgroundColor = "transparent";
 
         mediaRecorder.ondataavailable = function (event) {
           voiceChunks.push(event.data);
@@ -918,12 +923,6 @@ document.addEventListener("DOMContentLoaded", function () {
     startVoiceNoteBtn.classList.remove("recording");
     micIcon.style.display = "block";
     waveContainer.style.display = "none";
-    // Check if dark mode is on and adjust colors
-    if (bodyElement.classList.contains("dark-mode")) {
-      startVoiceNoteBtn.style.backgroundColor = "#f5f5f5"; // Dark mode wave color
-    } else {
-      startVoiceNoteBtn.style.backgroundColor = "#1e1e1e"; // Light mode wave color
-    }
   }
   // <---------- Toggle recording state when the button is clicked ----------->
   startVoiceNoteBtn.addEventListener("click", function () {

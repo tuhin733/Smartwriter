@@ -654,15 +654,21 @@ textarea:focus {
 
 /*>>>>>>>>>>>Recording button styles>>>>>>>>>>>*/
 #startVoiceNoteBtn {
-  background-color: #1e1e1e;
-  padding: 10px 12px;
+  background-color: transparent;
   border-radius: 50%;
-  color: #ffffff;
   border: none;
   cursor: pointer;
 }
 
-#startVoiceNoteBtn:hover {
+#micIcon {
+  background: #1e1e1e;
+  color: #f5f5f5;
+  font-size: 40px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+#micIcon:hover {
   background-color: #ff4c4c;
 }
 
@@ -785,16 +791,21 @@ textarea:focus {
 }
 
 .voice-input-container #saveVoiceNoteBtn {
-  margin-left: -18px;
-  background-color: #1e1e1e;
-  padding: 10px 12px;
+  background-color: transparent;
   border-radius: 50%;
-  color: #ffffff;
   border: none;
   cursor: pointer;
 }
 
-.voice-input-container #saveVoiceNoteBtn:hover {
+#saveVoiceNoteIcon {
+  background: #1e1e1e;
+  color: #f5f5f5;
+  font-size: 40px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.voice-input-container #saveVoiceNoteIcon:hover {
   background: #00aeff;
 }
 
@@ -900,6 +911,11 @@ span.close.close-voice-note-modal {
 /* Add these styles to your existing CSS */
 
 #waveContainer {
+  display: none; /* Hide wave container initially */
+  bottom: -20px;
+}
+
+#showWaveContainer {
   display: none; /* Hide wave container initially */
   bottom: -20px;
 }
@@ -1056,11 +1072,9 @@ span.close.close-voice-note-modal {
     border-radius: 8px;
   }
   .deleted-notes-modal-content {
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 0px;
+    margin: 3% auto;
+    width: 95%;
+    height: 95%;
   }
 
   #deletedNotesList {
@@ -1081,12 +1095,9 @@ span.close.close-voice-note-modal {
   /* voice note Modal content styles */
   .voice-note-modal-content {
     background-color: #fefefe;
-    margin: 0px;
-    padding: 20px;
-    border: none;
-    width: 100%;
-    height: 100%;
-    border-radius: 0px;
+    margin: 3% auto;
+    width: 95%;
+    height: 95%;
     overflow: hidden;
   }
 
@@ -1252,20 +1263,24 @@ body.dark-mode .searchInput {
   color: #ffffff;
 }
 
-body.dark-mode #saveVoiceNoteBtn {
+body.dark-mode #saveVoiceNoteIcon {
   background-color: #f5f5f5;
   color: #1e1e1e;
 }
 
-body.dark-mode #startVoiceNoteBtn {
+body.dark-mode #micIcon {
   background-color: #f5f5f5;
   color: #1e1e1e;
 }
 
-body.dark-mode #startVoiceNoteBtn:hover {
+body.dark-mode #micIcon:hover {
   background-color: #ff4c4c;
 }
 
 body.dark-mode .wave {
   background-color: #f5f5f5;
+}
+
+body.dark-mode .search-container button {
+  background: none;
 }

@@ -9,8 +9,11 @@
     <title>Smartwriter</title>
 
     <!-- link for favicon -->
-    <!-- For SVG format -->
-    <link rel="icon" href="logo/favicon.svg" type="image/svg+xml" />
+    <!-- `sizes="any"` is to fix Chrome bug -->
+    <link rel="icon" href="assets/favicons/favicon.ico" sizes="any" />
+    <link rel="icon" href="assets/favicons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/favicons/manifest.webmanifest" />
 
     <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css" />
@@ -30,7 +33,7 @@
     <!-- Header section with the title and search functionality -->
     <header class="header-container">
       <div class="logo-container">
-        <img src="logo/logo.svg" alt="logo image" />
+        <img src="assets/logo.svg" alt="logo image" />
         <h1>Smartwriter</h1>
       </div>
       <div class="search-container">
@@ -75,6 +78,11 @@
               <div class="voice-to-text-container">
                 <div id="start-recording">
                   <i class="fas fa-microphone"></i>
+                  <div class="wave-container" id="showWaveContainer">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                  </div>
                 </div>
               </div>
 
@@ -152,7 +160,7 @@
           type="text"
           class="searchInput"
           id="searchDeteledNote"
-          placeholder="Search voice notes..."
+          placeholder="Search deleted notes..."
         />
         <div class="deleted-notes-scroll">
           <div id="deletedNotesList"></div>
@@ -227,7 +235,9 @@
             </button>
 
             <button id="saveVoiceNoteBtn" disabled>
-              <span class="material-symbols-outlined">send</span>
+              <span id="saveVoiceNoteIcon" class="material-symbols-outlined"
+                >send</span
+              >
             </button>
           </div>
           <div id="recordedVoiceNote"></div>
