@@ -765,7 +765,11 @@ textarea:focus {
 .Password-verify-container h3,
 .password-setup-container h3,
 .voice-note-modal-content h3 {
-  color: #666;
+  color: #333;
+}
+
+.voice-note-modal-content h3 {
+  font-size: 24px;
 }
 
 .voice-button-container {
@@ -829,10 +833,12 @@ textarea:focus {
   align-items: center;
   justify-content: space-between;
   width: 50%;
-  padding: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
   background-color: #f0f0f0;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .play-pause-btn {
@@ -898,7 +904,7 @@ span.close.close-voice-note-modal {
 
 .voice-note-list {
   padding: 10px;
-  column-count: 2;
+  column-count: 3;
   column-gap: 10px;
   width: 100%;
 }
@@ -1107,10 +1113,12 @@ span.close.close-voice-note-modal {
 
   .audio-container {
     width: 90%;
-    padding: 10px;
+    padding: 5px;
     background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin-bottom: 5px;
   }
 
   .voice-note-list {
@@ -1123,7 +1131,7 @@ span.close.close-voice-note-modal {
   .searchInput {
     max-width: 200px;
     margin: 10px 0px 10px 0px;
-    padding: 8px;
+    padding: 10px;
     border: none;
     border-radius: 20px;
     outline: none;
@@ -1139,6 +1147,16 @@ span.close.close-voice-note-modal {
     cursor: pointer;
     margin-bottom: 10px;
     margin-top: 10px;
+  }
+
+  .close {
+    font-size: 30px;
+    border: none;
+  }
+
+  .delete-btn {
+    font-size: 15px;
+    padding: 9px 10px;
   }
 }
 
@@ -1293,4 +1311,10 @@ body.dark-mode .wave {
 
 body.dark-mode .search-container button {
   background: none;
+}
+
+body.dark-mode .Password-verify-container h3,
+body.dark-mode .password-setup-container h3,
+body.dark-mode .voice-note-modal-content h3 {
+  color: #e0e0e0;
 }
