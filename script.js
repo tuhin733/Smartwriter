@@ -817,21 +817,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (setupPassword === "") {
       errorText.textContent = "Password cannot be empty.";
-      errorText.style.color = "red"; // Set color for error messages
+      errorText.style.color = "#e74c3c"; // Set color for error messages
       errorText.style.display = "block";
       setTimeout(() => {
         errorText.style.display = "none";
-      }, 2000);
+      }, 3000);
       return; // Exit the function if validation fails
     }
 
     if (setupPassword.length < minPasswordLength) {
       errorText.textContent = "Password must be at least 6 characters long.";
-      errorText.style.color = "red"; // Set color for error messages
+      errorText.style.color = "#e74c3c"; // Set color for error messages
       errorText.style.display = "block";
       setTimeout(() => {
         errorText.style.display = "none";
-      }, 2000);
+      }, 3000);
       return; // Exit the function if validation fails
     }
 
