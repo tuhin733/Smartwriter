@@ -1,4 +1,9 @@
-// toast.js
+//TODO <----------Quick guide for Toast [How to use?]----------->
+
+//? showToast("Title and text cannot be empty.", "#212529", "#ffc107");
+
+//TODO <----------Quick guide for Toast [How to use?]----------->
+
 export function showToast(
   message,
   color = "#ffffff",

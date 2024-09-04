@@ -1,4 +1,9 @@
 import { showToast } from "./utils/toast.js";
+import {
+  openConfirmModal,
+  closeConfirmModal,
+} from "./utils/confirmationModal.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   // <------------------------------ ELEMENTS START ------------------------------->
 
@@ -269,8 +274,17 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteIcon.className = "fas fa-trash";
     deleteIcon.title = "Delete";
     deleteIcon.addEventListener("click", function () {
-      notesList.removeChild(div);
-      deleteNoteFromStorage(note);
+      openConfirmModal({
+        title: "Move to Trash",
+        message:
+          "Are you sure you want to move this item to the trash bin? You can restore it later if needed.",
+        confirmText: "Delete",
+        cancelText: "cancel",
+        onConfirm: function () {
+          notesList.removeChild(div);
+          deleteNoteFromStorage(note);
+        },
+      });
     });
 
     // <---------- View icon to display the note in a modal ----------->
@@ -521,14 +535,32 @@ document.addEventListener("DOMContentLoaded", function () {
       recoverIcon.className = "fas fa-undo";
       recoverIcon.title = "Recover";
       recoverIcon.addEventListener("click", function () {
-        recoverNoteFromDeleted(index);
+        openConfirmModal({
+          title: "Confirm Recover",
+          message:
+            "Do you want to recover deleted notes? This will restore everything to its original state.",
+          confirmText: "Recover",
+          cancelText: "Cancel",
+          onConfirm: function () {
+            recoverNoteFromDeleted(index);
+          },
+        });
       });
 
       const permanentDeleteIcon = document.createElement("i");
       permanentDeleteIcon.className = "fas fa-trash-alt";
       permanentDeleteIcon.title = "Permanent Delete";
       permanentDeleteIcon.addEventListener("click", function () {
-        permanentDeleteFromStorage(index);
+        openConfirmModal({
+          title: "Permanently Delete",
+          message:
+            "Are you sure you want to permanently delete this note? This action cannot be undone.",
+          confirmText: "Delete",
+          cancelText: "Cancel",
+          onConfirm: function () {
+            permanentDeleteFromStorage(index);
+          },
+        });
       });
 
       // Append icons to the icon container
@@ -628,8 +660,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // <---------- Delete icon functionality (reuse existing code for this) ----------->
       deleteIcon.addEventListener("click", function () {
-        notesList.removeChild(div);
-        deleteNoteFromStorage(note);
+        openConfirmModal({
+          title: "Move to Trash",
+          message:
+            "Are you sure you want to move this item to the trash bin? You can restore it later if needed.",
+          confirmText: "Delete",
+          cancelText: "cancel",
+          onConfirm: function () {
+            notesList.removeChild(div);
+            deleteNoteFromStorage(note);
+          },
+        });
       });
 
       const viewIcon = document.createElement("i");
@@ -716,8 +757,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // <---------- Add event listerners for the permanently delte all and recover all ----------->
-  recoverAllBtn.addEventListener("click", recoverAllNotes);
-  deleteAllBtn.addEventListener("click", deleteAllNotesPermanently);
+  recoverAllBtn.addEventListener("click", function () {
+    openConfirmModal({
+      title: "Confirm Recovery",
+      message:
+        "Do you want to recover all deleted notes? This will restore everything to its original state.",
+      confirmText: "Recover All",
+      cancelText: "Cancel",
+      onConfirm: function () {
+        recoverAllNotes();
+      },
+    });
+  });
+
+  deleteAllBtn.addEventListener("click", function () {
+    openConfirmModal({
+      title: "Delete all",
+      message:
+        "Are you sure you want to delete all note? This action cannot be undone.",
+      confirmText: "Delete All",
+      cancelText: "Cancel",
+      onConfirm: function () {
+        deleteAllNotesPermanently();
+      },
+    });
+  });
 
   // <---------- variables for voice recorder----------->
   let mediaRecorder;
@@ -744,20 +808,49 @@ document.addEventListener("DOMContentLoaded", function () {
   // <---------- save password ----------->
   savePasswordBtn.addEventListener("click", () => {
     const setupPasswordInput = document.getElementById("setupPassword");
-    const setupPassword = setupPasswordInput.value;
+    const setupPassword = setupPasswordInput.value.trim(); // Use trim() to remove leading and trailing spaces
 
-    if (setupPassword) {
-      localStorage.setItem("voiceNotePassword", setupPassword);
-      showToast("Password set successfully!", "#ffffff", "#28a745");
+    // Validation
+    const successText = document.getElementById("successText");
+    const errorText = document.getElementById("errorText");
+    const minPasswordLength = 4; // Example minimum length requirement
 
-      // Clear the input field
-      setupPasswordInput.value = "";
-
+    if (setupPassword === "") {
+      errorText.textContent = "Password cannot be empty.";
+      errorText.style.color = "red"; // Set color for error messages
+      errorText.style.display = "block";
       setTimeout(() => {
-        document.getElementById("passwordSetupModal").style.display = "none";
-        document.getElementById("voiceNoteModal").style.display = "flex";
-      }, 3000); // Wait for toast duration before redirecting
+        errorText.style.display = "none";
+      }, 2000);
+      return; // Exit the function if validation fails
     }
+
+    if (setupPassword.length < minPasswordLength) {
+      errorText.textContent = "Password must be at least 6 characters long.";
+      errorText.style.color = "red"; // Set color for error messages
+      errorText.style.display = "block";
+      setTimeout(() => {
+        errorText.style.display = "none";
+      }, 2000);
+      return; // Exit the function if validation fails
+    }
+
+    // If validation passes
+    localStorage.setItem("voiceNotePassword", setupPassword);
+
+    // Display success text
+    successText.style.display = "block";
+
+    // Clear the input field
+    setupPasswordInput.value = "";
+
+    setTimeout(() => {
+      // Hide the success text after showing it for a while
+      successText.style.display = "none";
+
+      document.getElementById("passwordSetupModal").style.display = "none";
+      document.getElementById("voiceNoteModal").style.display = "flex";
+    }, 4000); // Wait for toast duration before redirecting
   });
 
   // <---------- Verify Password ----------->
@@ -785,22 +878,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // <---------- Reset button function ----------->
   resetPasswordBtn.addEventListener("click", () => {
-    const passwordKey = "voiceNotePassword";
-    const voiceNotesKey = "voiceNotes";
+    openConfirmModal({
+      title: "Reset Password",
+      message:
+        "Are you sure you want to reset the password and delete all voice notes? This action cannot be undone.",
+      confirmText: "Reset",
+      cancelText: "Cancel",
+      onConfirm: () => {
+        const passwordKey = "voiceNotePassword";
+        const voiceNotesKey = "voiceNotes";
 
-    // Remove saved password and voice notes
-    localStorage.removeItem(passwordKey);
-    localStorage.removeItem(voiceNotesKey);
+        // Remove saved password and voice notes
+        localStorage.removeItem(passwordKey);
+        localStorage.removeItem(voiceNotesKey);
 
-    // Close all modals
-    document.querySelectorAll(".password-modal").forEach((modal) => {
-      modal.style.display = "none";
+        // Close all modals
+        document.querySelectorAll(".password-modal").forEach((modal) => {
+          modal.style.display = "none";
+        });
+
+        // Reload the page
+        this.location.reload();
+      },
     });
-
-    // Optionally, show a message or redirect
-    alert("Password has been reset and all voice notes have been deleted.");
-
-    this.location.reload();
   });
 
   // <---------- when the user ckicks on <span> (x), close the modal ----------->
@@ -1036,10 +1136,20 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
     deleteBtn.addEventListener("click", function () {
-      voiceNoteList.removeChild(listItem);
-      const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
-      const updatedNotes = voiceNotes.filter((n) => n.title !== title);
-      localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+      openConfirmModal({
+        title: "Confirm Delete",
+        message:
+          "Are you sure you want to delete this note? This action cannot be undone.",
+        confirmText: "Delete",
+        cancelText: "Cancel",
+        onConfirm: function () {
+          voiceNoteList.removeChild(listItem);
+          const voiceNotes =
+            JSON.parse(localStorage.getItem("voiceNotes")) || [];
+          const updatedNotes = voiceNotes.filter((n) => n.title !== title);
+          localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+        },
+      });
     });
 
     listItem.appendChild(deleteBtn);
