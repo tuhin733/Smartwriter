@@ -1418,3 +1418,7 @@ body.dark-mode #cancelBtn {
   border: none;
   background-color: transparent;
 }
+
+body.dark-mode #voiceNoteTitle {
+  border-color: #ffffff;
+}

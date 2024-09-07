@@ -355,17 +355,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // <---------- Toggle dark mode functionality ----------->
+  const modeIcon = document.getElementById("modeIcon");
+
   toggleDarkMode.addEventListener("click", function () {
     document.body.classList.toggle("dark-mode");
 
     const isDarkMode = document.body.classList.contains("dark-mode");
     localStorage.setItem("darkMode", isDarkMode);
+
+    // Update the icon based on the current mode
+    if (isDarkMode) {
+      modeIcon.classList.remove("fa-moon");
+      modeIcon.classList.add("fa-sun");
+    } else {
+      modeIcon.classList.remove("fa-sun");
+      modeIcon.classList.add("fa-moon");
+    }
   });
 
   // <---------- Apply saved dark mode setting ----------->
   const savedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
   if (savedDarkMode) {
     document.body.classList.add("dark-mode");
+    modeIcon.classList.remove("fa-moon");
+    modeIcon.classList.add("fa-sun");
   }
 
   // <---------- Character count for note input ----------->
@@ -850,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       document.getElementById("passwordSetupModal").style.display = "none";
       document.getElementById("voiceNoteModal").style.display = "flex";
-    }, 4000); // Wait for toast duration before redirecting
+    }, 3000); // Wait for toast duration before redirecting
   });
 
   // <---------- Verify Password ----------->
