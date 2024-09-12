@@ -798,9 +798,11 @@ textarea:focus {
 #saveVoiceNoteIcon {
   background: #1e1e1e;
   color: #f5f5f5;
-  font-size: 24px;
-  padding: 8px;
-  border-radius: 5px;
+  font-size: 40px;
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  border-radius: 50%;
 }
 
 .voice-input-container #saveVoiceNoteIcon:hover {
