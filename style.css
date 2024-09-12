@@ -12,7 +12,7 @@
 /*>>>>>>>>>>>Basic styling for the body>>>>>>>>>>>*/
 body {
   /*! background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%); */
-  background-color: #f8f8ff;
+  background-color: #ffffff;
   color: #333;
 }
 
@@ -170,7 +170,10 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-top: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+  /* box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
 }
 
 /*>>>>>>>>>>>Styling for the note content textarea>>>>>>>>>>>*/
@@ -185,7 +188,10 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-bottom: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+  /* box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
 }
 
 /*>>>>>>>>>>>Remove outline on focus for textarea and note title>>>>>>>>>>>*/
@@ -299,6 +305,7 @@ textarea:focus {
 .right-container {
   flex: 2;
   background-color: rgba(255, 255, 255, 0.2);
+
   backdrop-filter: blur(15px);
   border-radius: 10px;
   height: 80vh;
@@ -849,7 +856,7 @@ textarea:focus {
   background-color: transparent;
   border: none;
   font-size: 24px;
-  color: #075e54;
+  color: #34b7f1;
   cursor: pointer;
   width: 50px; /* Set a fixed width */
   height: 50px; /* Set a fixed height */
@@ -869,7 +876,7 @@ textarea:focus {
 
 .current-time-display {
   font-size: 14px;
-  color: #075e54;
+  color: #34b7f1;
   min-width: 40px;
   text-align: right;
 }
@@ -897,12 +904,18 @@ span.close.close-voice-note-modal {
   align-self: center;
   max-width: 200px;
   margin: 10px 0px 10px 0px;
-  padding: 8px;
+  padding: 10px;
   border: none;
   border-radius: 20px;
   outline: none;
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   color: #333;
+  border: 1px solid lightgray;
+}
+
+.searchInput:focus {
+  border: 1px solid #0090d3;
 }
 
 .voice-note-list {
@@ -1283,12 +1296,14 @@ body.dark-mode #noteTitle {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
+  border: none;
 }
 
 body.dark-mode textarea {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
+  border: none;
 }
 
 body.dark-mode button {
@@ -1381,6 +1396,7 @@ body.dark-mode .audio-container {
 body.dark-mode .searchInput {
   background-color: #3d3d3d;
   color: #ffffff;
+  border: none;
 }
 
 body.dark-mode #saveVoiceNoteIcon {

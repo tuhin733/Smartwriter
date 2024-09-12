@@ -993,8 +993,8 @@ document.addEventListener("DOMContentLoaded", function () {
           // Initialize Wavesurfer
           const wavesurfer = WaveSurfer.create({
             container: "#waveform",
-            waveColor: "#34b7f1",
-            progressColor: "#075e54",
+            waveColor: "#d3d3d3",
+            progressColor: "#34b7f1",
             cursorWidth: 0,
             height: 30,
             barWidth: 4,
@@ -1113,8 +1113,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize Wavesurfer
     const wavesurfer = WaveSurfer.create({
       container: waveformContainer,
-      waveColor: "#34b7f1",
-      progressColor: "#075e54",
+      waveColor: "#d3d3d3",
+      progressColor: "#34b7f1",
       cursorWidth: 0,
       height: 30,
       barWidth: 4,
