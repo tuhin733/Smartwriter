@@ -11,7 +11,8 @@
 
 /*>>>>>>>>>>>Basic styling for the body>>>>>>>>>>>*/
 body {
-  background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
+  /*! background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%); */
+  background-color: #f8f8ff;
   color: #333;
 }
 
@@ -99,6 +100,10 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   color: #333;
+  border: 1px solid lightgray;
+}
+.search-container input:focus {
+  border: 1px solid #1976d2;
 }
 
 /*>>>>>>>>>>>Styling for the header button>>>>>>>>>>>*/
@@ -165,7 +170,7 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 /*>>>>>>>>>>>Styling for the note content textarea>>>>>>>>>>>*/
@@ -180,8 +185,7 @@ body::-webkit-scrollbar-thumb,
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 /*>>>>>>>>>>>Remove outline on focus for textarea and note title>>>>>>>>>>>*/
@@ -298,8 +302,7 @@ textarea:focus {
   backdrop-filter: blur(15px);
   border-radius: 10px;
   height: 80vh;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   overflow-y: hidden;
 }
 
@@ -656,6 +659,8 @@ textarea:focus {
   font-size: 40px;
   padding: 5px;
   border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
 #micIcon:hover {
@@ -793,6 +798,9 @@ textarea:focus {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
 #saveVoiceNoteIcon {
@@ -1268,6 +1276,7 @@ body.dark-mode .search-container input {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
+  border: none;
 }
 
 body.dark-mode #noteTitle {

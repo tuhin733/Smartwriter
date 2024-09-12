@@ -374,11 +374,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // <---------- Apply saved dark mode setting ----------->
-  const savedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
-  if (savedDarkMode) {
+  const savedDarkMode = localStorage.getItem("darkMode");
+
+  // If no setting is saved or dark mode was previously enabled, apply dark mode
+  if (savedDarkMode === null || JSON.parse(savedDarkMode)) {
     document.body.classList.add("dark-mode");
     modeIcon.classList.remove("fa-moon");
     modeIcon.classList.add("fa-sun");
+  } else {
+    document.body.classList.remove("dark-mode");
+    modeIcon.classList.remove("fa-sun");
+    modeIcon.classList.add("fa-moon");
   }
 
   // <---------- Character count for note input ----------->
