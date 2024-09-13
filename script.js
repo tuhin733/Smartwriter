@@ -438,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       // Resize the image
       image.style.maxWidth = "130px";
-      image.style.boxShadow = "5px 5px 15px rgba(0, 0, 0, 0.5)";
+      image.style.boxShadow = "rgba(0, 0, 0, 0.5) 0 0 15px";
       image.style.clipPath = "none";
 
       // Hide the icons

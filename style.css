@@ -11,9 +11,9 @@
 
 /*>>>>>>>>>>>Basic styling for the body>>>>>>>>>>>*/
 body {
-  /*! background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%); */
-  background-color: #ffffff;
+  background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
   color: #333;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /*>>>>>>>>>>>scrollbar>>>>>>>>>>>*/
@@ -25,7 +25,7 @@ body::-webkit-scrollbar,
 .deleted-notes-scroll::-webkit-scrollbar,
 textarea::-webkit-scrollbar,
 .voice-note-scroll-container::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
   border-radius: 20px;
 }
 
@@ -71,6 +71,7 @@ body::-webkit-scrollbar-thumb,
   width: 90%;
   z-index: 1000;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 /*>>>>>>>>>>>Styling for the header text>>>>>>>>>>>*/
@@ -94,16 +95,15 @@ body::-webkit-scrollbar-thumb,
 /*>>>>>>>>>>>Styling for the search input field>>>>>>>>>>>*/
 .search-container input {
   padding: 10px;
-  border: none;
   border-radius: 20px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   color: #333;
-  border: 1px solid lightgray;
+  border: 1px solid transparent;
 }
 .search-container input:focus {
-  border: 1px solid #1976d2;
+  border: 1px solid #666;
 }
 
 /*>>>>>>>>>>>Styling for the header button>>>>>>>>>>>*/
@@ -165,15 +165,11 @@ body::-webkit-scrollbar-thumb,
   border-radius: 20px 20px 0px 0px;
   font-size: 16px;
   width: 100%;
-  border: none;
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  border-top: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
-  border-right: 1px solid lightgrey;
-  /* box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
+  border: none;
 }
 
 /*>>>>>>>>>>>Styling for the note content textarea>>>>>>>>>>>*/
@@ -184,14 +180,10 @@ body::-webkit-scrollbar-thumb,
   font-size: 14px;
   resize: none;
   height: 150px;
-  border: none;
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   color: #333;
-  border-bottom: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
-  border-right: 1px solid lightgrey;
-  /* box-shadow: rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; */
+  border: none;
 }
 
 /*>>>>>>>>>>>Remove outline on focus for textarea and note title>>>>>>>>>>>*/
@@ -229,28 +221,19 @@ textarea:focus {
   font-size: 24px;
 }
 
-.attach-icon:hover {
-  color: #00aeff;
-}
-
+.attach-icon:hover,
+.send-icon:hover,
 .fa-microphone:hover {
   color: #00aeff;
-}
-
-.fa-microphone {
-  color: #333;
+  transform: scale(1.1);
   transition: transform 0.3s ease;
-}
-
-.send-icon:hover {
-  color: #00aeff;
 }
 
 .preview-image {
   border-radius: 5px;
   max-width: 30px;
   clip-path: circle();
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 .counter-container {
@@ -344,7 +327,7 @@ textarea:focus {
   border-radius: 10px;
   border-top: 5px solid #764ba2;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow-wrap: break-word;
   break-inside: avoid;
   box-sizing: border-box;
@@ -363,8 +346,8 @@ textarea:focus {
 
 /*>>>>>>>>>>>Hover effect for note items>>>>>>>>>>>*/
 .note-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /*>>>>>>>>>>>Styling for icons within note items>>>>>>>>>>>*/
@@ -375,7 +358,7 @@ textarea:focus {
   display: flex;
   gap: 10px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 /*>>>>>>>>>>>Show icon buttons on note item hover>>>>>>>>>>>*/
@@ -499,18 +482,18 @@ textarea:focus {
   padding: 15px 15px 10px 15px;
   margin-bottom: 10px;
   border-radius: 10px;
+  transition: all 0.3s ease;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow-wrap: break-word;
   break-inside: avoid;
   box-sizing: border-box;
-  transition: all 0.3s ease;
   background: #f9f9f9;
 }
 
 .deleted-note-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .delete-recover-icons-container {
@@ -686,12 +669,12 @@ textarea:focus {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .voice-note-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .voice-note-item .title {
@@ -905,7 +888,6 @@ span.close.close-voice-note-modal {
   max-width: 200px;
   margin: 10px 0px 10px 0px;
   padding: 10px;
-  border: none;
   border-radius: 20px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.2);
@@ -1073,6 +1055,12 @@ span.close.close-voice-note-modal {
   margin-bottom: -10px;
 }
 
+.scroll-container,
+.deleted-notes-scroll,
+.scroll-container {
+  scroll-behavior: smooth;
+}
+
 /*>>>>>>>>>>>Responsive styling for devices with max-width of 768px>>>>>>>>>>>*/
 @media (max-width: 768px) {
   body::-webkit-scrollbar,
@@ -1235,7 +1223,6 @@ span.close.close-voice-note-modal {
     max-width: 200px;
     margin: 10px 0px 10px 0px;
     padding: 10px;
-    border: none;
     border-radius: 20px;
     outline: none;
     background-color: #f0f0f0;
@@ -1289,7 +1276,11 @@ body.dark-mode .search-container input {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
-  border: none;
+  border: 1px solid transparent;
+}
+
+body.dark-mode .search-container input:focus {
+  border: 1px solid #0090d3;
 }
 
 body.dark-mode #noteTitle {
@@ -1337,7 +1328,8 @@ body.dark-mode .note-item .fa-save:hover,
 body.dark-mode .note-item .fa-eye:hover,
 body.dark-mode .deleted-note-item i:hover,
 body.dark-mode .left-container .attach-icon:hover,
-body.dark-mode .left-container .send-icon:hover {
+body.dark-mode .left-container .send-icon:hover,
+body.dark-mode .left-container .fa-microphone:hover {
   background-color: rgba(80, 80, 80, 0.8);
 }
 
@@ -1394,9 +1386,13 @@ body.dark-mode .audio-container {
 }
 
 body.dark-mode .searchInput {
-  background-color: #3d3d3d;
+  background-color: #333;
   color: #ffffff;
-  border: none;
+  border: 1px solid transparent;
+}
+
+body.dark-mode .searchInput:focus {
+  border: 1px solid #0090d3;
 }
 
 body.dark-mode #saveVoiceNoteIcon {
@@ -1448,4 +1444,8 @@ body.dark-mode #cancelBtn {
 
 body.dark-mode #voiceNoteTitle {
   border-color: #ffffff;
+}
+
+body.dark-mode #voiceNoteTitle:focus {
+  border-color: #20bcf2;
 }
