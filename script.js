@@ -51,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // <---------- Voice-to-Text Integration related elements ----------->
   const startRecording = document.getElementById("start-recording");
 
+  // <------------------------------ ELEMENTS END ------------------------------->
+
   // <---------- Get the <span> elements that close the modals ----------->
   const closeModalBtn1 = document.getElementsByClassName(
     "close-voice-note-modal"
@@ -62,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "close close-password-verfy-modal"
   )[0];
 
-  // <------------------------------ ELEMENTS END ------------------------------->
   // <---------- Toggle dark mode functionality ----------->
   const themeDropdownBtn = document.getElementById("themeDropdownBtn");
   const themeDropdown = document.getElementById("themeDropdown");
