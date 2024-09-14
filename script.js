@@ -1,8 +1,5 @@
 import { showToast } from "./utils/toast.js";
-import {
-  openConfirmModal,
-  closeConfirmModal,
-} from "./utils/confirmationModal.js";
+import { openConfirmModal } from "./utils/confirmationModal.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // <------------------------------ ELEMENTS START ------------------------------->
@@ -13,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const saveBtn = document.getElementById("saveBtn"); // Button to save the note
   const notesList = document.getElementById("notesList"); // Container for displaying notes
   const searchInput = document.getElementById("searchInput"); // Input field for search
-  const toggleDarkMode = document.getElementById("toggleDarkMode"); // Button to toggle dark mode
 
   // <---------- Modal related elements ----------->
   const modal = document.getElementById("noteModal"); // Modal for viewing note details
@@ -198,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // <---------- Generate a random border color for the note ----------->
     const randomColor = getRandomColor();
     div.style.borderTopColor = randomColor;
-
     const noteTitle = document.createElement("h3");
     noteTitle.textContent = note.title;
 
@@ -232,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
         noteText.classList.add("editable"); // Add class for styling
         noteTitle.classList.add("editable"); // Add class for styling
         noteText.focus();
-        editIcon.className = "fas fa-save";
+        editIcon.className = "fas fa-circle-check";
         editIcon.title = "Save";
       } else {
         saveNote();
@@ -353,39 +348,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
-  // <---------- Toggle dark mode functionality ----------->
-  const modeIcon = document.getElementById("modeIcon");
-
-  toggleDarkMode.addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
-
-    const isDarkMode = document.body.classList.contains("dark-mode");
-    localStorage.setItem("darkMode", isDarkMode);
-
-    // Update the icon based on the current mode
-    if (isDarkMode) {
-      modeIcon.classList.remove("fa-moon");
-      modeIcon.classList.add("fa-sun");
-    } else {
-      modeIcon.classList.remove("fa-sun");
-      modeIcon.classList.add("fa-moon");
-    }
-  });
-
-  // <---------- Apply saved dark mode setting ----------->
-  const savedDarkMode = localStorage.getItem("darkMode");
-
-  // If no setting is saved or dark mode was previously enabled, apply dark mode
-  if (savedDarkMode === null || JSON.parse(savedDarkMode)) {
-    document.body.classList.add("dark-mode");
-    modeIcon.classList.remove("fa-moon");
-    modeIcon.classList.add("fa-sun");
-  } else {
-    document.body.classList.remove("dark-mode");
-    modeIcon.classList.remove("fa-sun");
-    modeIcon.classList.add("fa-moon");
-  }
 
   // <---------- Character count for note input ----------->
   noteInput.addEventListener("input", function () {
@@ -664,7 +626,7 @@ document.addEventListener("DOMContentLoaded", function () {
           noteText.classList.add("editable"); // Add class for styling
           noteTitle.classList.add("editable"); // Add class for styling
           noteText.focus();
-          editIcon.className = "fas fa-save";
+          editIcon.className = "fas fa-circle-check";
           editIcon.title = "Save";
         } else {
           saveNote();
@@ -1145,14 +1107,67 @@ document.addEventListener("DOMContentLoaded", function () {
       playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
     });
 
+    // Title and edit/save functionality
     const titleSpan = document.createElement("span");
     titleSpan.classList.add("title");
     titleSpan.textContent = title;
     listItem.appendChild(titleSpan);
 
-    const deleteBtn = document.createElement("button");
+    // Create the icons container
+    const iconsContainer = document.createElement("div");
+    iconsContainer.classList.add("icons-container");
+    listItem.appendChild(iconsContainer);
+
+    // Edit button
+    const editBtn = document.createElement("span");
+    editBtn.classList.add("edit-btn");
+    editBtn.innerHTML = '<i class="fa-solid fa-edit"></i>';
+    iconsContainer.appendChild(editBtn);
+
+    // Save button (initially hidden)
+    const saveBtn = document.createElement("span");
+    saveBtn.classList.add("save-btn");
+    saveBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    saveBtn.style.display = "none";
+    iconsContainer.appendChild(saveBtn);
+
+    editBtn.addEventListener("click", () => {
+      const inputField = document.createElement("input");
+      inputField.value = titleSpan.textContent;
+      inputField.classList.add("edit-title-input");
+      listItem.replaceChild(inputField, titleSpan);
+      editBtn.style.display = "none";
+      saveBtn.style.display = "inline-block";
+
+      inputField.focus(); // Focus the input field to allow immediate editing
+    });
+
+    saveBtn.addEventListener("click", () => {
+      const updatedTitle = listItem.querySelector(".edit-title-input").value;
+      titleSpan.textContent = updatedTitle;
+      listItem.replaceChild(
+        titleSpan,
+        listItem.querySelector(".edit-title-input")
+      );
+      editBtn.style.display = "inline-block";
+      saveBtn.style.display = "none";
+
+      // Update localStorage
+      const voiceNotes = JSON.parse(localStorage.getItem("voiceNotes")) || [];
+      const updatedNotes = voiceNotes.map((n) => {
+        if (n.title === title) {
+          return { ...n, title: updatedTitle };
+        }
+        return n;
+      });
+      localStorage.setItem("voiceNotes", JSON.stringify(updatedNotes));
+    });
+
+    // Delete button
+    const deleteBtn = document.createElement("span");
     deleteBtn.classList.add("delete-btn");
     deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    iconsContainer.appendChild(deleteBtn);
 
     deleteBtn.addEventListener("click", function () {
       openConfirmModal({
@@ -1171,7 +1186,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    listItem.appendChild(deleteBtn);
+    // Append the item to the list
     voiceNoteList.appendChild(listItem);
   }
 
@@ -1237,4 +1252,56 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
+  // <---------- Toggle dark mode functionality ----------->
+  const themeDropdownBtn = document.getElementById("themeDropdownBtn");
+  const themeDropdown = document.getElementById("themeDropdown");
+  const dropdownLinks = themeDropdown.getElementsByTagName("a");
+
+  themeDropdownBtn.addEventListener("click", function () {
+    themeDropdown.classList.toggle("show");
+  });
+
+  Array.from(dropdownLinks).forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const theme = this.getAttribute("data-theme");
+      applyTheme(theme);
+      themeDropdown.classList.remove("show");
+    });
+  });
+
+  function applyTheme(theme) {
+    document.body.classList.remove(
+      "dark-mode",
+      "modern-light-mode",
+      "light-mode"
+    );
+
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+
+      //todo dark mode code here
+    } else if (theme === "modern-light") {
+      document.body.classList.add("modern-light-mode");
+
+      //todo mordern light code here
+    } else if (theme === "light") {
+      document.body.classList.add("light-mode");
+
+      //todo light mode code here
+    } else {
+      console.error("Unknown theme:", theme);
+    }
+
+    localStorage.setItem("theme", theme);
+  }
+
+  // Apply saved theme on page load
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme("dark"); // Set default to dark mode
+  }
 });

@@ -162,6 +162,7 @@ body::-webkit-scrollbar-thumb,
 /*>>>>>>>>>>>Styling for the note title input>>>>>>>>>>>*/
 #noteTitle {
   padding: 15px;
+  margin-top: 10px;
   border-radius: 20px 20px 0px 0px;
   font-size: 16px;
   width: 100%;
@@ -369,7 +370,7 @@ textarea:focus {
 /*>>>>>>>>>>>Styling for individual icon buttons>>>>>>>>>>>*/
 .note-item .fa-edit,
 .note-item .fa-trash,
-.note-item .fa-save,
+.note-item .fa-circle-check,
 .note-item .fa-eye {
   cursor: pointer;
   color: #333;
@@ -381,10 +382,11 @@ textarea:focus {
 /*>>>>>>>>>>>Hover effect for icon buttons>>>>>>>>>>>*/
 .note-item .fa-edit:hover,
 .note-item .fa-trash:hover,
-.note-item .fa-save:hover,
+.note-item .fa-circle-check:hover,
 .note-item .fa-eye:hover {
-  background-color: #c5eaff;
   color: #00aeff;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 /*>>>>>>>>>>>Modal styles>>>>>>>>>>>*/
@@ -515,7 +517,8 @@ textarea:focus {
 
 .delete-recover-icons-container .fa-undo:hover {
   color: #00aeff;
-  background: #c8eeff;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .delete-recover-icons-container .fa-trash-alt {
@@ -524,23 +527,30 @@ textarea:focus {
 
 .delete-recover-icons-container .fa-trash-alt:hover {
   color: #ff4c4c;
-  background: #ffcccc;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 #showDeletedNotesBtn {
   float: right;
   border: none;
   padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0px;
   border-radius: 0px 10px 0px 10px;
-  background: #1976d2;
+  background: #0090d3;
   color: #ffffff;
+}
+
+#showDeletedNotesBtn i {
+  margin-right: 5px;
 }
 
 #showDeletedNotesBtn:hover {
   background: #ff4c4c;
   color: #ffffff;
 }
-
 #recoverAllBtn,
 #deleteAllBtn {
   border: none;
@@ -685,28 +695,48 @@ textarea:focus {
   text-align: center;
 }
 
-.delete-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
+.icons-container {
+  display: flex;
+  align-self: flex-end;
+  gap: 15px;
   order: 3;
 }
-.delete-btn i {
-  background-color: #e0e0e0;
+
+.edit-title-input {
+  outline: none;
+  border: none;
+  text-align: center;
   font-size: 16px;
-  color: #ff4c4c;
-  padding: 10px;
-  border-radius: 50%;
+  font-weight: bold;
+  background-color: transparent;
 }
 
-.delete-btn i:hover {
-  background-color: #ff4c4c;
-  color: #ffffff;
+.icons-container i {
+  font-size: 16px;
+  color: #333;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.icons-container i:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.fa-circle-check:hover {
+  color: #28a745;
+}
+
+.icons-container .fa-trash:hover {
+  color: #ff4c4c;
+}
+.icons-container .fa-edit:hover {
+  color: #00aeff;
 }
 
 .custom-buttom {
   border: none;
+  cursor: pointer;
   background: #00aeff;
   color: #ffffff;
   padding: 8px;
@@ -743,6 +773,26 @@ textarea:focus {
   align-items: center;
   padding: 10px;
   gap: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#verifyPasswordBtn {
+  width: 100%;
+  margin: 0px;
+}
+
+#resetPasswordBtn {
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+  color: #0090d3;
+  cursor: pointer;
 }
 
 .Password-verify-container p {
@@ -810,15 +860,25 @@ textarea:focus {
 #openModalBtn {
   float: right;
   border: none;
+  cursor: pointer;
   padding: 10px;
   border-radius: 0px 0px 0px 10px;
   background: #1976d2;
   color: #ffffff;
   margin-left: 8px;
 }
+
+#openModalBtn i {
+  font-size: 18px;
+  color: #ffffff;
+  margin-right: 5px;
+  padding: 0px;
+}
 #openModalBtn:hover {
   background: #ff4c4c;
   color: #ffffff;
+  transform: none;
+  transition: none;
 }
 
 /*>>>>>>>>>>>audio container>>>>>>>>>>>*/
@@ -890,7 +950,6 @@ span.close.close-voice-note-modal {
   padding: 10px;
   border-radius: 20px;
   outline: none;
-  /* background-color: rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(10px);
   color: #333;
   border: 1px solid lightgray;
@@ -1059,6 +1118,46 @@ span.close.close-voice-note-modal {
 .deleted-notes-scroll,
 .scroll-container {
   scroll-behavior: smooth;
+}
+
+.theme-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-dropdown button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 200px;
+  top: 100%;
+  left: -90px;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  border-radius: 10px;
+  color: #0090d3;
+}
+
+.show {
+  display: block;
 }
 
 /*>>>>>>>>>>>Responsive styling for devices with max-width of 768px>>>>>>>>>>>*/
@@ -1248,6 +1347,10 @@ span.close.close-voice-note-modal {
     border-radius: 8px;
     text-align: center;
   }
+
+  .dropdown-content {
+    left: -160px;
+  }
 }
 
 /*>>>>>>>>>>>Dark mode styling>>>>>>>>>>>*/
@@ -1313,7 +1416,7 @@ body.dark-mode .note-item {
 
 body.dark-mode .note-item .fa-edit,
 body.dark-mode .note-item .fa-trash,
-body.dark-mode .note-item .fa-save,
+body.dark-mode .note-item .fa-circle-check,
 body.dark-mode .note-item .fa-eye,
 body.dark-mode .deleted-note-item i,
 body.dark-mode .left-container .attach-icon,
@@ -1323,13 +1426,12 @@ body.dark-mode .left-container .send-icon {
 
 body.dark-mode .note-item .fa-edit:hover,
 body.dark-mode .note-item .fa-trash:hover,
-body.dark-mode .note-item .fa-save:hover,
+body.dark-mode .note-item .fa-circle-check:hover,
 body.dark-mode .note-item .fa-eye:hover,
-body.dark-mode .deleted-note-item i:hover,
 body.dark-mode .left-container .attach-icon:hover,
 body.dark-mode .left-container .send-icon:hover,
 body.dark-mode .left-container .fa-microphone:hover {
-  background-color: rgba(80, 80, 80, 0.8);
+  color: #00aeff;
 }
 
 /*>>>>>>>>>>>Dark Mode Scrollbar>>>>>>>>>>>*/
@@ -1422,12 +1524,15 @@ body.dark-mode .voice-note-modal-content h3 {
   color: #e0e0e0;
 }
 
-body.dark-mode .delete-btn i {
-  background-color: #363636;
+body.dark-mode .icons-container i {
   color: #ffffff;
 }
-body.dark-mode .delete-btn i:hover {
-  color: #ffd8d8;
+body.dark-mode .icons-container .fa-trash:hover {
+  color: #ff4c4c;
+}
+
+body.dark-mode .icons-container .fa-edit:hover {
+  color: #00aeff;
 }
 
 body.dark-mode .confirm-modal-content {
@@ -1448,3 +1553,64 @@ body.dark-mode #voiceNoteTitle {
 body.dark-mode #voiceNoteTitle:focus {
   border-color: #20bcf2;
 }
+body.dark-mode .dropdown-content {
+  background-color: #333;
+}
+
+body.dark-mode .dropdown-content a {
+  color: white;
+}
+body.dark-mode .dropdown-content a:hover {
+  color: #0090d3;
+}
+
+/* light theme code start */
+
+.light-mode body::-webkit-scrollbar-track,
+.light-mode .about-section::-webkit-scrollbar-track,
+.light-mode .right-container::-webkit-scrollbar-track,
+.light-mode .scroll-container::-webkit-scrollbar-track,
+.light-mode .modal-content::-webkit-scrollbar-track,
+.light-mode .deleted-notes-scroll::-webkit-scrollbar-track {
+  background: whitesmoke;
+}
+
+.light-mode body::-webkit-scrollbar-thumb,
+.light-mode .about-section::-webkit-scrollbar-thumb,
+.light-mode .right-container::-webkit-scrollbar-thumb,
+.light-mode .scroll-container::-webkit-scrollbar-thumb,
+.light-mode .modal-content::-webkit-scrollbar-thumb,
+.light-mode .deleted-notes-scroll::-webkit-scrollbar-thumb {
+  background: #0090d3;
+}
+body.light-mode {
+  background: whitesmoke;
+}
+
+body.light-mode .modal-content {
+  border: none;
+  background-color: #f9f9f9;
+}
+
+body.light-mode .note-item {
+  border: none;
+  background-color: #f9f9f9;
+
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+body.light-mode #noteTitle {
+  background-color: #fff;
+}
+
+body.light-mode .left-container textarea {
+  background-color: #fff;
+}
+body.light-mode .search-container input {
+  border: 1px solid lightgray;
+}
+body.light-mode .search-container input:focus {
+  border: 1px solid #0090d3;
+}
+/* light theme code end */

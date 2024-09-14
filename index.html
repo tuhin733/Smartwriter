@@ -41,10 +41,20 @@
           autocomplete="off"
         />
         <!-- Button to toggle dark mode -->
-        <button id="toggleDarkMode">
-          <i id="modeIcon" class="fas fa-moon"></i>
-          <!-- Moon icon for dark mode -->
-        </button>
+        <!-- Theme dropdown button -->
+        <div class="theme-dropdown">
+          <button id="themeDropdownBtn">
+            <i class="material-symbols-outlined" title="Modes">settings</i>
+          </button>
+          <div id="themeDropdown" class="dropdown-content">
+            <button id="showDeletedNotesBtn">
+              <i class="fas fa-trash"></i>Trash
+            </button>
+            <a href="#" data-theme="dark">Dark Mode</a>
+            <a href="#" data-theme="light">Light Mode</a>
+            <a href="#" data-theme="modern-light">Modern Light Mode</a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -134,10 +144,9 @@
       <!-- Right container to display saved notes -->
       <div class="right-container">
         <!-- Trigger/Open The Modal -->
-        <button id="openModalBtn">Voice Note</button>
-
-        <!-- Button to show deleted notes modal -->
-        <button id="showDeletedNotesBtn">Deleted Notes</button>
+        <button id="openModalBtn">
+          <i class="fas fa-microphone"></i>Voice Note
+        </button>
         <h1>Your Notes</h1>
         <div class="scroll-container">
           <!-- Container where notes will be dynamically added -->
@@ -237,9 +246,7 @@
           <div class="button-container">
             <button id="verifyPasswordBtn" class="custom-buttom">Verify</button>
             <!-- Reset Password Button -->
-            <button id="resetPasswordBtn" class="custom-buttom">
-              Reset Password
-            </button>
+            <button id="resetPasswordBtn">Reset Password</button>
           </div>
         </div>
       </div>
@@ -276,7 +283,7 @@
             </button>
             <button id="saveVoiceNoteBtn" disabled>
               <span id="saveVoiceNoteIcon" class="material-symbols-outlined"
-                >audio_file</span
+                >save</span
               >
             </button>
           </div>
