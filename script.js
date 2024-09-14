@@ -63,6 +63,57 @@ document.addEventListener("DOMContentLoaded", function () {
   )[0];
 
   // <------------------------------ ELEMENTS END ------------------------------->
+  // <---------- Toggle dark mode functionality ----------->
+  const themeDropdownBtn = document.getElementById("themeDropdownBtn");
+  const themeDropdown = document.getElementById("themeDropdown");
+  const dropdownLinks = themeDropdown.getElementsByTagName("a");
+
+  themeDropdownBtn.addEventListener("click", function () {
+    themeDropdown.classList.toggle("show");
+  });
+
+  Array.from(dropdownLinks).forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const theme = this.getAttribute("data-theme");
+      applyTheme(theme);
+      themeDropdown.classList.remove("show");
+    });
+  });
+
+  function applyTheme(theme) {
+    document.body.classList.remove(
+      "dark-mode",
+      "modern-light-mode",
+      "light-mode"
+    );
+
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+
+      //TODO: dark mode code here
+    } else if (theme === "modern-light") {
+      document.body.classList.add("modern-light-mode");
+
+      //TODO: mordern light code here
+    } else if (theme === "light") {
+      document.body.classList.add("light-mode");
+
+      //TODO: light mode code here
+    } else {
+      console.error("Unknown theme:", theme);
+    }
+
+    localStorage.setItem("theme", theme);
+  }
+
+  // Apply saved theme on page load
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme("dark"); // Set default to dark mode
+  }
 
   // <---------- Load saved notes from local storage ----------->
   const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -1252,56 +1303,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
-  // <---------- Toggle dark mode functionality ----------->
-  const themeDropdownBtn = document.getElementById("themeDropdownBtn");
-  const themeDropdown = document.getElementById("themeDropdown");
-  const dropdownLinks = themeDropdown.getElementsByTagName("a");
-
-  themeDropdownBtn.addEventListener("click", function () {
-    themeDropdown.classList.toggle("show");
-  });
-
-  Array.from(dropdownLinks).forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const theme = this.getAttribute("data-theme");
-      applyTheme(theme);
-      themeDropdown.classList.remove("show");
-    });
-  });
-
-  function applyTheme(theme) {
-    document.body.classList.remove(
-      "dark-mode",
-      "modern-light-mode",
-      "light-mode"
-    );
-
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-
-      //todo dark mode code here
-    } else if (theme === "modern-light") {
-      document.body.classList.add("modern-light-mode");
-
-      //todo mordern light code here
-    } else if (theme === "light") {
-      document.body.classList.add("light-mode");
-
-      //todo light mode code here
-    } else {
-      console.error("Unknown theme:", theme);
-    }
-
-    localStorage.setItem("theme", theme);
-  }
-
-  // Apply saved theme on page load
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme("dark"); // Set default to dark mode
-  }
 });

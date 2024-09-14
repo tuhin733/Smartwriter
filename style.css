@@ -8,12 +8,33 @@
   margin: 0;
   box-sizing: border-box;
 }
+/* Preloader styles */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(
+    0,
+    0,
+    0
+  ); /* Use a background color to match the theme */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+}
+
+/* Hide preloader once page has loaded */
+body.loaded #preloader {
+  display: none;
+}
 
 /*>>>>>>>>>>>Basic styling for the body>>>>>>>>>>>*/
 body {
-  background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
   color: #333;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /*>>>>>>>>>>>scrollbar>>>>>>>>>>>*/
@@ -1357,6 +1378,7 @@ span.close.close-voice-note-modal {
 body.dark-mode .main-container {
   background-color: #1e1e1e;
   color: #e0e0e0;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode .header-container,
@@ -1583,8 +1605,9 @@ body.dark-mode .dropdown-content a:hover {
 .light-mode .deleted-notes-scroll::-webkit-scrollbar-thumb {
   background: #0090d3;
 }
-body.light-mode {
+body.light-mode .main-container {
   background: whitesmoke;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.light-mode .modal-content {
@@ -1614,3 +1637,9 @@ body.light-mode .search-container input:focus {
   border: 1px solid #0090d3;
 }
 /* light theme code end */
+
+/* mordern light theme code start */
+body.modern-light-mode {
+  background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
