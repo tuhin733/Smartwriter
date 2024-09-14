@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
       openConfirmModal({
         title: "Move to Trash",
         message:
-          "Are you sure you want to move this item to the trash bin? You can restore it later if needed.",
+          "Are you sure you want to move this note to the trash bin? You can restore it form [ Setting ➡ Trash ] later if needed.",
         confirmText: "Delete",
         cancelText: "cancel",
         onConfirm: function () {
@@ -696,7 +696,7 @@ document.addEventListener("DOMContentLoaded", function () {
         openConfirmModal({
           title: "Move to Trash",
           message:
-            "Are you sure you want to move this item to the trash bin? You can restore it later if needed.",
+            "Are you sure you want to move this note to the trash bin? You can restore it later if needed.",
           confirmText: "Delete",
           cancelText: "cancel",
           onConfirm: function () {
