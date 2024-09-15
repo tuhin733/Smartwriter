@@ -1159,13 +1159,20 @@ span.close.close-voice-note-modal {
 
 .theme-dropdown {
   position: relative;
-  display: inline-block;
+  display: inline-flex; /* Change to inline-flex to align content vertically */
+  align-items: center; /* Vertically center items within .theme-dropdown */
 }
 
 .theme-dropdown button {
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 24px;
+  display: inline-flex; /* Ensure button contents are flex items */
+  align-items: center; /* Vertically center the icon */
+  justify-content: center; /* Horizontally center the icon */
+  height: 40px; /* Set a consistent height for the button */
+  line-height: 40px; /* Match line-height to the button height */
   font-size: 24px;
 }
 
