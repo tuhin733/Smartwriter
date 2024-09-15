@@ -91,16 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (theme === "dark") {
       document.body.classList.add("dark-mode");
-
-      //TODO: dark mode code here
     } else if (theme === "modern-light") {
       document.body.classList.add("modern-light-mode");
-
-      //TODO: mordern light code here
     } else if (theme === "light") {
       document.body.classList.add("light-mode");
-
-      //TODO: light mode code here
     } else {
       console.error("Unknown theme:", theme);
     }
