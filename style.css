@@ -1404,6 +1404,25 @@ span.close.close-voice-note-modal {
   .dropdown-content {
     left: -160px;
   }
+  body.dark-mode #noteTitle {
+    background-color: rgba(60, 60, 60, 0.8);
+    color: #e0e0e0;
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(173, 216, 230, 0.384);
+    border-right: 2px solid rgba(173, 216, 230, 0.384);
+    border-left: 2px solid rgba(173, 216, 230, 0.384);
+    border-bottom: none;
+  }
+
+  body.dark-mode textarea {
+    background-color: rgba(60, 60, 60, 0.8);
+    color: #e0e0e0;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(173, 216, 230, 0.384);
+    border-right: 2px solid rgba(173, 216, 230, 0.384);
+    border-left: 2px solid rgba(173, 216, 230, 0.384);
+    border-top: none;
+  }
 }
 
 /*>>>>>>>>>>>Dark mode styling>>>>>>>>>>>*/
