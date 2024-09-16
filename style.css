@@ -1244,10 +1244,18 @@ span.close.close-voice-note-modal {
   .left-container textarea {
     font-size: 15px;
     height: 200px;
+    border-top: none;
+    border-left: 2px solid lightblue;
+    border-right: 2px solid lightblue;
+    border-bottom: 2px solid lightblue;
   }
 
   .left-container #noteTitle {
     font-size: 18px;
+    border-top: 2px solid lightblue;
+    border-left: 2px solid lightblue;
+    border-right: 2px solid lightblue;
+    border-bottom: none;
   }
 
   .counter-container {
@@ -1435,14 +1443,12 @@ body.dark-mode #noteTitle {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
-  border: none;
 }
 
 body.dark-mode textarea {
   background-color: rgba(60, 60, 60, 0.8);
   color: #e0e0e0;
   backdrop-filter: blur(10px);
-  border: none;
 }
 
 body.dark-mode button {
@@ -1649,18 +1655,10 @@ body.light-mode .note-item {
 
 body.light-mode #noteTitle {
   background-color: #fff;
-  border-top: 2px solid lightblue;
-  border-left: 2px solid lightblue;
-  border-right: 2px solid lightblue;
-  border-bottom: none;
 }
 
 body.light-mode .left-container textarea {
   background-color: #fff;
-  border-top: none;
-  border-left: 2px solid lightblue;
-  border-right: 2px solid lightblue;
-  border-bottom: 2px solid lightblue;
 }
 body.light-mode .search-container input {
   border: 1px solid lightgray;
