@@ -1004,7 +1004,7 @@ document.addEventListener("DOMContentLoaded", function () {
             waveColor: "#d3d3d3",
             progressColor: "#34b7f1",
             cursorWidth: 0,
-            height: 40,
+            height: 50,
             barWidth: 4,
             barRadius: 3,
           });
@@ -1124,7 +1124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       waveColor: "#d3d3d3",
       progressColor: "#34b7f1",
       cursorWidth: 0,
-      height: 40,
+      height: 50,
       barWidth: 4,
       barRadius: 3,
     });
