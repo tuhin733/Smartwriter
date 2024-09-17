@@ -113,10 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // <---------- Load saved notes from local storage ----------->
   const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
 
-  // <---------- Distplay saved notes on the page ----------->
+  // <---------- Display saved notes on the page ----------->
   savedNotes.forEach((note, index) => addNoteToList(note, index));
 
-  // <---------- Save notes to lacal storage and display it ----------->
+  // <---------- Save notes to local storage and display it ----------->
   saveBtn.addEventListener("click", function () {
     const noteText = noteInput.value.trim();
     const noteTitleText = noteTitle.value.trim();
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // <---------- Attach the key press enent listener to both noteInput and noteTitle ----------->
+  // <---------- Attach the key press event listener to both noteInput and noteTitle ----------->
   noteInput.addEventListener("keydown", handleKeyPress);
   noteTitle.addEventListener("keydown", handleKeyPress);
 
@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function () {
       icon3.style.display = "none";
     }
   };
-  // <---------- variables for text-to-speach ----------->
+  // <---------- variables for text-to-speech ----------->
   let recognition;
   let isRecording = false; // Track the recording state
 
@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderNotes(); // Call the renderNotes function to update the main notes list
   }
 
-  // <---------- Fnction to permanently delete a note form deleted notes ----------->
+  // <---------- Function to permanently delete a note form deleted notes ----------->
   function permanentDeleteFromStorage(index) {
     const deletedNotes = JSON.parse(localStorage.getItem("deletedNotes")) || [];
     deletedNotes.splice(index, 1);
@@ -740,10 +740,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // <---------- Eventlister to show deleted notes when the button in clicked ----------->
+  // <---------- Eventlistener to show deleted notes when the button in clicked ----------->
   showDeletedNotesBtn.addEventListener("click", showDeletedNotes);
 
-  // <---------- Close the deleted notes moadal when clicking on the close button ----------->
+  // <---------- Close the deleted notes modal when clicking on the close button ----------->
   const closeDeletedNotesModal = document.querySelector(
     "#deletedNotesModal .close"
   );
@@ -783,7 +783,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Optionally, update any other UI elements
   }
 
-  // <---------- Add event listerners for the permanently delte all and recover all ----------->
+  // <---------- Add event listeners for the permanently delete all and recover all ----------->
   recoverAllBtn.addEventListener("click", function () {
     openConfirmModal({
       title: "Confirm Recovery",
@@ -930,7 +930,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // <---------- when the user ckicks on <span> (x), close the modal ----------->
+  // <---------- when the user clicks on <span> (x), close the modal ----------->
   closeModalBtn1.onclick = function () {
     voiceNoteModal.style.display = "none";
     resetVoiceNote();
@@ -1004,7 +1004,7 @@ document.addEventListener("DOMContentLoaded", function () {
             waveColor: "#d3d3d3",
             progressColor: "#34b7f1",
             cursorWidth: 0,
-            height: 30,
+            height: 40,
             barWidth: 4,
             barRadius: 3,
           });
@@ -1069,7 +1069,7 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.readAsDataURL(blob);
   }
 
-  // <---------- Fnction to save the voice note with a title ----------->
+  // <---------- Function to save the voice note with a title ----------->
   saveVoiceNoteBtn.addEventListener("click", function () {
     const title = voiceNoteTitleInput.value.trim();
     if (!title || !currentVoiceBlob) {
@@ -1124,7 +1124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       waveColor: "#d3d3d3",
       progressColor: "#34b7f1",
       cursorWidth: 0,
-      height: 30,
+      height: 40,
       barWidth: 4,
       barRadius: 3,
     });

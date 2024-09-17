@@ -349,7 +349,7 @@ textarea:focus {
 }
 
 /*>>>>>>>>>>>Styling for the notes list container>>>>>>>>>>>*/
-.notesList-containter {
+.notesList-container {
   column-count: 3;
   column-gap: 10px;
   width: 100%;
@@ -771,7 +771,7 @@ textarea:focus {
   color: #00aeff;
 }
 
-.custom-buttom {
+.custom-button {
   border: none;
   cursor: pointer;
   background: #00aeff;
@@ -780,7 +780,7 @@ textarea:focus {
   border-radius: 5px;
   margin-left: 5px;
 }
-.custom-buttom:hover {
+.custom-button:hover {
   background: #0090d3;
 }
 
@@ -1282,7 +1282,7 @@ span.close.close-voice-note-modal {
 
     transition: opacity 0.3s ease;
   }
-  .notesList-containter {
+  .notesList-container {
     column-count: 1; /* Show only 1 note in a row for small screens */
   }
   .right-container {
@@ -1405,9 +1405,6 @@ span.close.close-voice-note-modal {
     left: -160px;
   }
   body.dark-mode #noteTitle {
-    background-color: rgba(60, 60, 60, 0.8);
-    color: #e0e0e0;
-    backdrop-filter: blur(10px);
     border-top: 2px solid rgba(173, 216, 230, 0.384);
     border-right: 2px solid rgba(173, 216, 230, 0.384);
     border-left: 2px solid rgba(173, 216, 230, 0.384);
@@ -1415,9 +1412,6 @@ span.close.close-voice-note-modal {
   }
 
   body.dark-mode textarea {
-    background-color: rgba(60, 60, 60, 0.8);
-    color: #e0e0e0;
-    backdrop-filter: blur(10px);
     border-bottom: 2px solid rgba(173, 216, 230, 0.384);
     border-right: 2px solid rgba(173, 216, 230, 0.384);
     border-left: 2px solid rgba(173, 216, 230, 0.384);
@@ -1687,7 +1681,7 @@ body.light-mode .search-container input:focus {
 }
 /* light theme code end */
 
-/* mordern light theme code start */
+/* modern light theme code start */
 body.modern-light-mode {
   background: linear-gradient(135deg, #c3ecff 0%, #deeafb 100%);
   transition: background-color 0.5s ease, color 0.5s ease;
